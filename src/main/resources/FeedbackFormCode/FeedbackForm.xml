@@ -1,0 +1,677 @@
+<?xml version="1.1" encoding="UTF-8"?>
+
+<!--
+ * See the NOTICE file distributed with this work for additional
+ * information regarding copyright ownership.
+ *
+ * This is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as
+ * published by the Free Software Foundation; either version 2.1 of
+ * the License, or (at your option) any later version.
+ *
+ * This software is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with this software; if not, write to the Free
+ * Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
+ * 02110-1301 USA, or see the FSF site: http://www.fsf.org.
+-->
+
+<xwikidoc version="1.4" reference="FeedbackFormCode.FeedbackForm" locale="">
+  <web>FeedbackFormCode</web>
+  <name>FeedbackForm</name>
+  <language/>
+  <defaultLanguage/>
+  <translation>0</translation>
+  <creator>xwiki:XWiki.Admin</creator>
+  <parent>WebHome</parent>
+  <author>xwiki:XWiki.Admin</author>
+  <contentAuthor>xwiki:XWiki.Admin</contentAuthor>
+  <version>1.1</version>
+  <title/>
+  <comment/>
+  <minorEdit>false</minorEdit>
+  <syntaxId>xwiki/2.1</syntaxId>
+  <hidden>true</hidden>
+  <content>{{velocity output="false"}}
+#macro(createFeedbackFormModal)
+  #set ($macro.feedbackTypes = ['website', 'currentPage', 'other'])
+  &lt;div id="feedbackformModal" class="modal fade feedbackform-modal" role="dialog"&gt;
+    &lt;div class="modal-dialog modal-lg"&gt;
+      &lt;div class="modal-content"&gt;
+        &lt;div class="modal-header"&gt;
+          &lt;button type="button" class="close" data-dismiss="modal"&gt;&amp;times;&lt;/button&gt;
+          &lt;h4 class="modal-title"&gt;$services.localization.render('feedbackform.title')&lt;/h4&gt;
+        &lt;/div&gt;
+        &lt;form id="feedbackForm" enctype="multipart/form-data"&gt;
+          &lt;div class="modal-body"&gt;
+            &lt;div class="box infomessage"&gt;
+              $services.localization.render('feedbackform.intoText')
+            &lt;/div&gt;
+            &lt;div class="form-group"&gt;
+              &lt;label for="feedbackType"&gt;$services.localization.render('feedbackform.type')&lt;/label&gt;
+              &lt;select class="form-control" id="feedbackType" name="feedbackType"&gt;
+                #foreach($type in $macro.feedbackTypes)
+                  &lt;option value="$escapetool.xml($type)"&gt;$services.localization.render("feedbackform.type.${type}")&lt;/option&gt;
+                #end
+              &lt;/select&gt;
+            &lt;/div&gt;
+            &lt;hr/&gt;
+            &lt;div class="form-group"&gt;
+              &lt;label class="d-block"&gt;$services.localization.render('feedbackform.user.title')&lt;/label&gt;
+              &lt;label class="radio-inline" for="feedbackUserTitle1"&gt;
+                &lt;input type="radio" name="feedbackUserTitle" value="mrs" /&gt;$services.localization.render('feedbackform.user.mrs')
+              &lt;/label&gt;
+              &lt;label class="radio-inline" for="feedbackUserTitle2"&gt;
+                &lt;input type="radio" name="feedbackUserTitle" value="mr" /&gt;$services.localization.render('feedbackform.user.mr')
+              &lt;/label&gt;
+            &lt;/div&gt;
+            &lt;div class="row"&gt;
+              &lt;div class="form-group col-md-6"&gt;
+                &lt;label for="feedbackUserFirstName"&gt;$services.localization.render('feedbackform.user.firstName') &lt;span class="mandatory-field"&gt;*&lt;/span&gt;&lt;/label&gt;
+                &lt;input type="text" class="form-control" id="feedbackUserFirstName" name="feedbackUserFirstName" required /&gt;
+              &lt;/div&gt;
+              &lt;div class="form-group col-md-6"&gt;
+                &lt;label for="feedbackUserLastName"&gt;$services.localization.render('feedbackform.user.lastName') &lt;span class="mandatory-field"&gt;*&lt;/span&gt;&lt;/label&gt;
+                &lt;input type="text" class="form-control" id="feedbackUserLastName" name="feedbackUserLastName" required /&gt;
+              &lt;/div&gt;
+            &lt;/div&gt;
+            &lt;div class="form-group"&gt;
+              &lt;label for="feedbackUserEmail"&gt;$services.localization.render('feedbackform.user.email') &lt;span class="mandatory-field"&gt;*&lt;/span&gt;&lt;/label&gt;
+              &lt;input type="email" class="form-control" id="feedbackUserEmail" name="feedbackUserEmail" required /&gt;
+            &lt;/div&gt;
+            &lt;/hr&gt;
+            &lt;div class="form-group"&gt;
+              &lt;label for="feedbackSubject"&gt;$services.localization.render('feedbackform.subject') &lt;span class="mandatory-field"&gt;*&lt;/span&gt;&lt;/label&gt;
+              &lt;input type="text" class="form-control" id="feedbackSubject" name="feedbackSubject" required /&gt;
+            &lt;/div&gt;
+            &lt;div class="form-group"&gt;
+              &lt;label for="feedbackMessage"&gt;$services.localization.render('feedbackform.message') &lt;span class="mandatory-field"&gt;*&lt;/span&gt;&lt;/label&gt;
+              &lt;textarea id="feedbackMessage" name="feedbackMessage" class="form-control" required&gt;&lt;/textarea&gt;
+            &lt;/div&gt;
+            &lt;div class="form-group"&gt;
+              &lt;label for="feedbackFile"&gt;$services.localization.render('feedbackform.attachment')&lt;/label&gt;
+              &lt;input type="file" class="form-control" id="feedbackFile" name="feedbackFile" accept=".jpg, .jpeg, .png, .pdf" /&gt;
+            &lt;/div&gt;
+            &lt;hr/&gt;
+            &lt;div class="form-group"&gt;
+              &lt;label class="checkbox-inline"&gt;
+                &lt;input type="checkbox" name="" id="provideBrowserData" /&gt;$services.localization.render('feedbackform.consentMessage')
+              &lt;/label&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+          &lt;div class="modal-footer"&gt;
+            &lt;button type="submit" class="btn btn-primary pull-left" id="submitFeedbackButton"&gt;$services.localization.render('feedbackform.sendFeedback')&lt;/button&gt;
+          &lt;/div&gt;
+        &lt;/form&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+#end
+#####
+#macro(validateFeedbackFormData $isValid)
+  #set ($macro.isValid = true)
+  #set ($macro.mandatoryFields = ['feedbackType', 'feedbackUserTitle', 'feedbackUserFirstName', 'feedbackUserLastName', 'feedbackUserEmail', 'feedbackSubject', 'feedbackMessage'])
+  #set ($macro.allowedFilextensions = ['jpg', 'jpeg', 'png', 'pdf'])
+  #foreach($fieldName in $macro.mandatoryFields)
+    #if ("$!request.get($fieldName)" == '')
+      #set ($macro.isValid = false)
+      #break
+    #end
+  #end
+  #if ($macro.isValid)
+    #if ("$!xwiki.fileupload.getFileItems()" != '' &amp;&amp; $xwiki.fileupload.getFileItems().size() &gt; 0)
+      #foreach($item in $xwiki.fileupload.getFileItems())
+        #set ($fileExtension = $item.name.substring($mathtool.add($item.name.lastIndexOf("."), 1)))
+        #set ($fileMaxSize = 5242880) ## 5242880 = 5 * 1024 * 1024 = 5MB
+        #if ($item.fieldName == 'feedbackFile' &amp;&amp; "$!item.name" != '' &amp;&amp; (!$macro.allowedFilextensions.contains($fileExtension) || $item.getSize() &gt; $fileMaxSize))
+          #set ($macro.isValid = false)
+          #break
+        #end
+      #end
+    #end
+  #end
+  #set ($isValid = $NULL)
+  #setVariable("$isValid" $macro.isValid)
+#end
+#####
+#macro(checkEmailSendingStatus $mailResultObj $emailStatus)
+  #set ($macro.emailStatus = true)
+  ## Check if the message was created properly and if we have permissions to send emails
+  #set ($macro.emailErrorMessage = "An error occurred while sending feedback form email, Error : {}")
+  #if ($services.mail.sender.lastError)
+    #set ($macro.emailStatus = false)
+    #set ($discard = $logger.error($macro.emailErrorMessage, $exceptiontool.getStackTrace($services.mail.sender.lastError)))
+  #end
+  ## Check if the mail we tried to send has failed to be sent
+  #set ($macro.statuses = $mailResultObj.statusResult.getAllErrors())
+  #if ($macro.statuses.hasNext())
+    #set ($macro.status = $macro.statuses.next())
+    #set ($macro.emailStatus = false)
+    #set ($discard = $logger.error($macro.emailErrorMessage, "$macro.status.errorSummary ($macro.status.state) $macro.status.errorDescription"))
+  #end
+  #set ($emailStatus = $NULL)
+  #setVariable("$emailStatus" $macro.emailStatus)
+#end
+#####
+#macro(getSenderEmail $senderEmail)
+  #set ($feedbackFormConfigurationObj = $xwiki.getDocument('FeedbackFormCode.Configuration').getObject('FeedbackFormCode.ConfigurationClass'))
+  #set ($macro.email = $feedbackFormConfigurationObj.getProperty('platformSenderEmail').value)
+  #if ("$!macro.email" == '')
+    #set ($macro.email = $services.mail.sender.configuration.fromAddress)
+  #end
+  #set ($senderEmail = $NULL)
+  #setVariable("$senderEmail" $macro.email)
+#end
+#####
+#macro(getFeedbackRecipientEmail $recipientEmail)
+  #set ($feedbackFormConfigurationObj = $xwiki.getDocument('FeedbackFormCode.Configuration').getObject('FeedbackFormCode.ConfigurationClass'))
+  #set ($macro.email = $feedbackFormConfigurationObj.getProperty('feedbackRecipientEmail').value)
+  #if ("$!macro.email" == '')
+    #set ($macro.email = $services.mail.sender.configuration.fromAddress)
+  #end
+  #set ($recipientEmail = $NULL)
+  #setVariable("$recipientEmail" $macro.email)
+#end
+#####
+#macro(sendFeedback)
+  #validateFeedbackFormData($doSend)
+  #if (!$doSend)
+    $jsontool.serialize({"status" : false, "message" : $services.localization.render('feedbackform.invalidFormData')})
+    #break
+  #end
+  #set ($logger = $services.logging.getLogger('SendFeedbackForm'))
+  ## Send a mail to wiki and to the user who added the feedback with a summary of the feedback
+  #set ($macro.templateReference = $services.model.createDocumentReference('', 'FeedbackFormCode', 'FeedbackFormMailTemplate'))
+  #set ($macro.velocityVariables = {
+    'feedbackType' : $request.feedbackType,
+    'feedbackUserTitle' : $request.feedbackUserTitle,
+    'feedbackUserFirstName' : $request.feedbackUserFirstName,
+    'feedbackUserLastName' : $request.feedbackUserLastName,
+    'feedbackUserEmail' : $request.feedbackUserEmail,
+    'feedbackSubject' : $request.feedbackSubject,
+    'feedbackMessage' : $request.feedbackMessage,
+    'contextLocale' : $xcontext.locale,
+    'pageURL' : $request.pageURL,
+    'referrer' : $request.referrer,
+    'userAgent' : $request.userAgent,
+    'screenResolution' : $request.screenResolution,
+    'mailRecipient' : 'wiki'
+  })
+  #if ("$!request.referrer" != '' ||
+    "$!request.userAgent" != '' ||
+    "$!request.screenResolution" != '')
+     #set ($discard = $macro.velocityVariables.put('environment', true))
+  #end
+  #set ($macro.mailParameters = {'language' : 'en', 'velocityVariables' : $macro.velocityVariables})
+  ## Add the attachment to the mail
+  #if ("$!xwiki.fileupload.getFileItems()" != '' &amp;&amp; $xwiki.fileupload.getFileItems().size() &gt; 0)
+    #foreach($item in $xwiki.fileupload.getFileItems())
+      #if ($item.fieldName == 'feedbackFile' &amp;&amp;  "$!item.name" != '')
+        #set ($macro.tempDoc = $xwiki.getDocument('FeedbackFormCode.FeedbackForm'))
+        #set ($macro.attachment = $macro.tempDoc.addAttachment($item.name, $item.inputStream))
+        #set ($discard = $macro.mailParameters.put('attachments', [$macro.attachment]))
+        #break
+      #end
+    #end
+  #end
+  ##
+  #getSenderEmail($senderEmail)
+  #getFeedbackRecipientEmail($feedbackRecipientEmail)
+  #set ($macro.message = $services.mail.sender.createMessage('template', $macro.templateReference, $macro.mailParameters))
+  #set ($discard = $macro.message.setFrom($senderEmail))
+  #set ($discard = $macro.message.addRecipient('to', $feedbackRecipientEmail))
+  #set ($mailResult = $services.mail.sender.send($macro.message))
+  #checkEmailSendingStatus($mailResult $emailSent)
+  #if ($emailSent)
+    $jsontool.serialize({"status" : true, "message" : $services.localization.render('feedbackform.confirmationMessage')})
+    ## Send email to user who added the feedback
+    #set ($discard = $macro.mailParameters.velocityVariables.put('mailRecipient', 'user'))
+    #set ($discard = $macro.mailParameters.velocityVariables.put('environment', false))
+    #set ($macro.message = $services.mail.sender.createMessage('template', $macro.templateReference, $macro.mailParameters))
+    #set ($discard = $macro.message.setFrom($senderEmail))
+    #set ($discard = $macro.message.addRecipient('to', $request.feedbackUserEmail))
+    #set ($mailResult = $services.mail.sender.send($macro.message))
+    #checkEmailSendingStatus($mailResult $emailSent)
+  #else
+    $jsontool.serialize({"status" : false, "message" : $services.localization.render('feedbackform.sendingFeedbackError')})
+  #end
+#end
+{{/velocity}}
+
+{{velocity}}
+#set ($action = $request.action)
+#set ($reference = $request.reference)
+#if ("$!action" != '' &amp;&amp; "$!request.reference" != '')
+  #if($action == 'loadFeedbackForm')
+    {{html}}
+      #createFeedbackFormModal()
+    {{/html}}
+  #elseif($action == 'sendFeedback')
+    #sendFeedback()
+  #end
+#end
+{{/velocity}}</content>
+  <attachment>
+    <filename>download.gif</filename>
+    <mimetype>image/gif</mimetype>
+    <author>xwiki:XWiki.Admin</author>
+    <version>1.1</version>
+    <comment/>
+    <content>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</content>
+    <filesize>1553</filesize>
+  </attachment>
+  <object>
+    <name>FeedbackFormCode.FeedbackForm</name>
+    <number>0</number>
+    <className>XWiki.JavaScriptExtension</className>
+    <guid>0d66b826-7a52-4f6f-a6e9-d4972f49a362</guid>
+    <class>
+      <name>XWiki.JavaScriptExtension</name>
+      <customClass/>
+      <customMapping/>
+      <defaultViewSheet/>
+      <defaultEditSheet/>
+      <defaultWeb/>
+      <nameField/>
+      <validationScript/>
+      <cache>
+        <cache>0</cache>
+        <defaultValue>long</defaultValue>
+        <disabled>0</disabled>
+        <displayType>select</displayType>
+        <freeText>forbidden</freeText>
+        <largeStorage>0</largeStorage>
+        <multiSelect>0</multiSelect>
+        <name>cache</name>
+        <number>5</number>
+        <prettyName>Caching policy</prettyName>
+        <relationalStorage>0</relationalStorage>
+        <separator> </separator>
+        <separators>|, </separators>
+        <size>1</size>
+        <unmodifiable>0</unmodifiable>
+        <values>long|short|default|forbid</values>
+        <classType>com.xpn.xwiki.objects.classes.StaticListClass</classType>
+      </cache>
+      <code>
+        <contenttype>PureText</contenttype>
+        <disabled>0</disabled>
+        <editor>PureText</editor>
+        <name>code</name>
+        <number>2</number>
+        <prettyName>Code</prettyName>
+        <rows>20</rows>
+        <size>50</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.TextAreaClass</classType>
+      </code>
+      <name>
+        <disabled>0</disabled>
+        <name>name</name>
+        <number>1</number>
+        <prettyName>Name</prettyName>
+        <size>30</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
+      </name>
+      <parse>
+        <disabled>0</disabled>
+        <displayFormType>select</displayFormType>
+        <displayType>yesno</displayType>
+        <name>parse</name>
+        <number>4</number>
+        <prettyName>Parse content</prettyName>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.BooleanClass</classType>
+      </parse>
+      <use>
+        <cache>0</cache>
+        <disabled>0</disabled>
+        <displayType>select</displayType>
+        <freeText>forbidden</freeText>
+        <largeStorage>0</largeStorage>
+        <multiSelect>0</multiSelect>
+        <name>use</name>
+        <number>3</number>
+        <prettyName>Use this extension</prettyName>
+        <relationalStorage>0</relationalStorage>
+        <separator> </separator>
+        <separators>|, </separators>
+        <size>1</size>
+        <unmodifiable>0</unmodifiable>
+        <values>currentPage|onDemand|always</values>
+        <classType>com.xpn.xwiki.objects.classes.StaticListClass</classType>
+      </use>
+    </class>
+    <property>
+      <cache>long</cache>
+    </property>
+    <property>
+      <code>require(['jquery'], function($){
+  var showFeedbackButton = function(){
+    var translation = "$services.localization.render('feedbackform.buttonLabel')";
+    var html = '&lt;a href="#" id="feedback-button" class="feedback-button"&gt;' + translation + '&lt;/a&gt;';
+    html = html + '&lt;div id="fade-bg" class="feedback-form-fade-bg" style="display: none;"&gt;&lt;/div&gt;';
+    html = html + '&lt;div id="feedback-form-loading" class="feedback-form-loading" tabindex="0" style="display: none;"&gt;&lt;/div&gt;';
+    $('body').append(html);
+  };
+
+  var showLoader = function(){
+    $('#fade-bg').show();
+    $('#feedback-form-loading').show();
+  };
+
+  var hideLoader = function(){
+    $('#fade-bg').hide();
+    $('#feedback-form-loading').hide();
+  };
+
+  var showFeedbackForm = function(){
+    showLoader();
+    var documentReference = XWiki.Model.serialize(XWiki.currentDocument.documentReference);
+    var url = new XWiki.Document('FeedbackForm', 'FeedbackFormCode').getURL('get', 'action=loadFeedbackForm&amp;reference=' + encodeURIComponent(documentReference));
+    url = url + "&amp;language=${xcontext.language}";
+    $.get(url, function(data) {
+      var feedbackformModalId = '#feedbackformModal';
+      $(feedbackformModalId).remove();
+      $("body").append(data);
+      var feedbackFormModal = $(feedbackformModalId);
+      var feedbackForm = $('#feedbackForm');
+      feedbackFormModal.modal();
+      $(feedbackForm).submit(function(event){
+        var valid = validateFileField();
+        if(valid){
+          submitFeedbackForm(feedbackForm, feedbackFormModal);
+        }
+        event.preventDefault();
+      });
+    })
+    .always(function() {
+      hideLoader();
+    });
+  };
+
+  var validateFileField = function(){
+    var resp = true;
+    var fileElement = $('#feedbackFile');
+    if(fileElement.get(0).files.length &gt; 0) {
+      var maxFileSize = 5 * 1024 * 1024; // 5MB
+      var fileName = fileElement.get(0).files[0].name;
+      var fileExt = fileName.substr((fileName.lastIndexOf('.') + 1));
+      var allowedExtensions = ['jpg', 'jpeg', 'png', 'pdf'];
+      if ((fileElement.get(0).files[0].size &gt; maxFileSize) || ($.inArray(fileExt, allowedExtensions) == -1)) {
+        fileElement.get(0).setCustomValidity("$services.localization.render('feedbackform.invalidFile')");
+        fileElement.get(0).reportValidity();
+        resp = false;
+      } else {
+        fileElement.get(0).setCustomValidity("");
+      }
+    }
+    return resp;
+  }
+  var showMessage = function(feedbackFormModal, messageType, message){
+    $('.modal-body', feedbackFormModal).html($('&lt;div/&gt;').addClass('box ' + messageType + 'message').html(message));
+  }
+
+  var submitFeedbackForm = function(feedbackForm, feedbackFormModal){
+    var formData = new FormData(feedbackForm[0]);
+    formData.append('pageURL', window.location.href);
+    if($('#provideBrowserData', feedbackForm).is(':checked')){
+      formData.append('referrer', document.referrer);
+      formData.append('userAgent', window.navigator.userAgent);
+      formData.append('screenResolution', window.screen.width + "x" + window.screen.height);
+    }
+    var documentReference = XWiki.Model.serialize(XWiki.currentDocument.documentReference);
+    var url = new XWiki.Document('FeedbackForm', 'FeedbackFormCode').getURL('get', 'action=sendFeedback&amp;xpage=plain&amp;outputSyntax=plain&amp;reference=' + encodeURIComponent(documentReference));
+    url = url + "&amp;language=${xcontext.language}";
+    showLoader();
+    $.ajax({
+      url: url,
+      type: 'post',
+      data: formData,
+      contentType: false,
+      processData: false,
+      dataType:'json'
+    })
+    .done(function(data) {
+      if(data){
+        var messageType = data.status ? 'success' : 'error';
+        showMessage(feedbackFormModal, messageType, data.message);
+      }
+      else
+      {
+        showMessage(feedbackFormModal, 'error', "Unknown error !");
+      }
+    })
+    .fail(function(jqXHR, textStatus, errorThrown) {
+      showMessage(feedbackFormModal, 'error', "An error occurred while sending the feedback. Error : " + errorThrown);
+    })
+    .always(function() {
+      $("#submitFeedbackButton").remove();
+      hideLoader();
+    });
+  }
+  /////
+  $(document).ready(function(){
+    var feedbackFormEnabled = "$xwiki.getDocument('FeedbackFormCode.Configuration').getObject('FeedbackFormCode.ConfigurationClass').getProperty('enabled').value";
+    if(feedbackFormEnabled == '1'){
+      showFeedbackButton();
+    }
+    $('.showFeedbackForm, #feedback-button').click(function(event){
+      event.preventDefault();
+      showFeedbackForm();
+    });
+  });
+});</code>
+    </property>
+    <property>
+      <name/>
+    </property>
+    <property>
+      <parse>1</parse>
+    </property>
+    <property>
+      <use>always</use>
+    </property>
+  </object>
+  <object>
+    <name>FeedbackFormCode.FeedbackForm</name>
+    <number>0</number>
+    <className>XWiki.StyleSheetExtension</className>
+    <guid>1bbb1249-472c-4be5-887a-d394eea81e5f</guid>
+    <class>
+      <name>XWiki.StyleSheetExtension</name>
+      <customClass/>
+      <customMapping/>
+      <defaultViewSheet/>
+      <defaultEditSheet/>
+      <defaultWeb/>
+      <nameField/>
+      <validationScript/>
+      <cache>
+        <cache>0</cache>
+        <defaultValue>long</defaultValue>
+        <disabled>0</disabled>
+        <displayType>select</displayType>
+        <freeText>forbidden</freeText>
+        <largeStorage>0</largeStorage>
+        <multiSelect>0</multiSelect>
+        <name>cache</name>
+        <number>5</number>
+        <prettyName>Caching policy</prettyName>
+        <relationalStorage>0</relationalStorage>
+        <separator> </separator>
+        <separators>|, </separators>
+        <size>1</size>
+        <unmodifiable>0</unmodifiable>
+        <values>long|short|default|forbid</values>
+        <classType>com.xpn.xwiki.objects.classes.StaticListClass</classType>
+      </cache>
+      <code>
+        <contenttype>PureText</contenttype>
+        <disabled>0</disabled>
+        <editor>PureText</editor>
+        <name>code</name>
+        <number>2</number>
+        <prettyName>Code</prettyName>
+        <rows>20</rows>
+        <size>50</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.TextAreaClass</classType>
+      </code>
+      <contentType>
+        <cache>0</cache>
+        <disabled>0</disabled>
+        <displayType>select</displayType>
+        <freeText>forbidden</freeText>
+        <largeStorage>0</largeStorage>
+        <multiSelect>0</multiSelect>
+        <name>contentType</name>
+        <number>6</number>
+        <prettyName>Content Type</prettyName>
+        <relationalStorage>0</relationalStorage>
+        <separator> </separator>
+        <separators>|, </separators>
+        <size>1</size>
+        <unmodifiable>0</unmodifiable>
+        <values>CSS|LESS</values>
+        <classType>com.xpn.xwiki.objects.classes.StaticListClass</classType>
+      </contentType>
+      <name>
+        <disabled>0</disabled>
+        <name>name</name>
+        <number>1</number>
+        <prettyName>Name</prettyName>
+        <size>30</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
+      </name>
+      <parse>
+        <disabled>0</disabled>
+        <displayFormType>select</displayFormType>
+        <displayType>yesno</displayType>
+        <name>parse</name>
+        <number>4</number>
+        <prettyName>Parse content</prettyName>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.BooleanClass</classType>
+      </parse>
+      <use>
+        <cache>0</cache>
+        <disabled>0</disabled>
+        <displayType>select</displayType>
+        <freeText>forbidden</freeText>
+        <largeStorage>0</largeStorage>
+        <multiSelect>0</multiSelect>
+        <name>use</name>
+        <number>3</number>
+        <prettyName>Use this extension</prettyName>
+        <relationalStorage>0</relationalStorage>
+        <separator> </separator>
+        <separators>|, </separators>
+        <size>1</size>
+        <unmodifiable>0</unmodifiable>
+        <values>currentPage|onDemand|always</values>
+        <classType>com.xpn.xwiki.objects.classes.StaticListClass</classType>
+      </use>
+    </class>
+    <property>
+      <cache>long</cache>
+    </property>
+    <property>
+      <code>.feedback-button {
+  background: @btn-primary-bg;
+  border: 2px solid white;
+  border-radius: 0 0 5px 5px;
+  -webkit-box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+  border-top: none;
+  color: @btn-primary-color;
+  display: block;
+  font-size: 12px;
+  font-weight: bold;
+  left: 100%;
+  padding: 5px;
+  position: fixed;
+  top: 40%;
+  transform: rotate(90deg);
+  transform-origin: top left;
+  text-decoration: none !important;
+  white-space: nowrap;
+  z-index: 300;
+}
+
+.feedback-form-fade-bg {
+  background: black;
+  height: 100%;
+  left: 0;
+  opacity: .5;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000000;
+}
+
+.feedback-form-loading {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  margin: auto;
+  height: 40px;
+  width: 40px;
+  z-index: 1000001;
+  border-radius: 5px;
+  background-color: #fff;
+  background-image: url("$doc.getAttachmentURL('download.gif')");
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+
+body.modal-open {
+  overflow-y: hidden !important;
+}
+
+.feedbackform-modal label.d-block {
+  display: block;
+}
+
+.feedbackform-modal input[type="text"], .feedbackform-modal input[type="email"] {
+  width: 100%;
+}
+
+.feedbackform-modal label span.mandatory-field {
+  color: red;
+}
+
+.feedbackform-modal .box {
+  line-height: 30px;
+}
+
+.feedbackform-modal .checkbox-inline {
+  font-weight: 700;
+}
+
+.feedbackform-modal .checkbox-inline input[type='checkbox'] {
+  bottom: 2px;
+}</code>
+    </property>
+    <property>
+      <contentType>LESS</contentType>
+    </property>
+    <property>
+      <name/>
+    </property>
+    <property>
+      <parse>1</parse>
+    </property>
+    <property>
+      <use>always</use>
+    </property>
+  </object>
+</xwikidoc>
