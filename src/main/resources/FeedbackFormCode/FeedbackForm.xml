@@ -61,7 +61,7 @@
             &lt;/div&gt;
             &lt;hr/&gt;
             &lt;div class="form-group"&gt;
-              &lt;label class="d-block"&gt;$services.localization.render('feedbackform.user.title')&lt;/label&gt;
+              &lt;label class="d-block"&gt;$services.localization.render('feedbackform.user.title')&lt;span class="mandatory-field"&gt;*&lt;/span&gt;&lt;/label&gt;
               &lt;label class="radio-inline" for="feedbackUserTitle1"&gt;
                 &lt;input type="radio" name="feedbackUserTitle" value="mrs" /&gt;$services.localization.render('feedbackform.user.mrs')
               &lt;/label&gt;
