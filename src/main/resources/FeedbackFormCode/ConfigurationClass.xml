@@ -20,7 +20,7 @@
  * 02110-1301 USA, or see the FSF site: http://www.fsf.org.
 -->
 
-<xwikidoc version="1.4" reference="FeedbackFormCode.ConfigurationClass" locale="">
+<xwikidoc version="1.5" reference="FeedbackFormCode.ConfigurationClass" locale="">
   <web>FeedbackFormCode</web>
   <name>ConfigurationClass</name>
   <language/>
@@ -29,6 +29,7 @@
   <creator>xwiki:XWiki.Admin</creator>
   <parent>XWiki.XWikiClasses</parent>
   <author>xwiki:XWiki.Admin</author>
+  <originalMetadataAuthor>XWiki.Admin</originalMetadataAuthor>
   <contentAuthor>xwiki:XWiki.Admin</contentAuthor>
   <version>1.1</version>
   <title>Configuration Class</title>
@@ -75,6 +76,49 @@
       <validationRegExp>/^(([^@\s]+)@((?:[-a-zA-Z0-9]+\.)+[a-zA-Z]{2,}))?$/</validationRegExp>
       <classType>com.xpn.xwiki.objects.classes.EmailClass</classType>
     </feedbackRecipientEmail>
+    <feedbackSpace>
+      <cache>0</cache>
+      <classname/>
+      <customDisplay/>
+      <defaultValue>Feedbacks</defaultValue>
+      <disabled>0</disabled>
+      <displayType>input</displayType>
+      <freeText>allowed</freeText>
+      <hint/>
+      <idField/>
+      <largeStorage>0</largeStorage>
+      <multiSelect>0</multiSelect>
+      <name>feedbackSpace</name>
+      <number>6</number>
+      <picker>1</picker>
+      <prettyName>feedbackSpace</prettyName>
+      <relationalStorage>0</relationalStorage>
+      <separator> </separator>
+      <separators/>
+      <size>1</size>
+      <sort/>
+      <sql/>
+      <unmodifiable>0</unmodifiable>
+      <validationMessage/>
+      <validationRegExp/>
+      <valueField/>
+      <classType>com.xpn.xwiki.objects.classes.PageClass</classType>
+    </feedbackSpace>
+    <generalButtonEnabled>
+      <customDisplay/>
+      <defaultValue/>
+      <disabled>0</disabled>
+      <displayFormType>select</displayFormType>
+      <displayType/>
+      <hint/>
+      <name>generalButtonEnabled</name>
+      <number>4</number>
+      <prettyName>General button enabled</prettyName>
+      <unmodifiable>0</unmodifiable>
+      <validationMessage/>
+      <validationRegExp/>
+      <classType>com.xpn.xwiki.objects.classes.BooleanClass</classType>
+    </generalButtonEnabled>
     <platformSenderEmail>
       <customDisplay/>
       <disabled>0</disabled>
@@ -89,6 +133,34 @@
       <validationRegExp/>
       <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
     </platformSenderEmail>
+    <publicFeedbackTypes>
+      <cache>0</cache>
+      <classname>FeedbackFormCode.FeedbackTypeClass</classname>
+      <customDisplay/>
+      <defaultValue>FeedbackFormCode.WebsiteFeedbackType</defaultValue>
+      <disabled>0</disabled>
+      <displayType>select</displayType>
+      <freeText/>
+      <hint/>
+      <idField/>
+      <largeStorage>0</largeStorage>
+      <multiSelect>1</multiSelect>
+      <name>publicFeedbackTypes</name>
+      <number>5</number>
+      <picker>1</picker>
+      <prettyName>publicFeedbackTypes</prettyName>
+      <relationalStorage>0</relationalStorage>
+      <separator> </separator>
+      <separators/>
+      <size>1</size>
+      <sort/>
+      <sql/>
+      <unmodifiable>0</unmodifiable>
+      <validationMessage/>
+      <validationRegExp/>
+      <valueField/>
+      <classType>com.xpn.xwiki.objects.classes.PageClass</classType>
+    </publicFeedbackTypes>
   </class>
   <object>
     <name>FeedbackFormCode.ConfigurationClass</name>
