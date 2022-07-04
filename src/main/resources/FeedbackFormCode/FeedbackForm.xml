@@ -1,6 +1,7 @@
 <?xml version="1.1" encoding="UTF-8"?>
 
-<!--
+<xwikidoc version="1.5" reference="FeedbackFormCode.FeedbackForm" locale="">
+  <!--
  * See the NOTICE file distributed with this work for additional
  * information regarding copyright ownership.
  *
@@ -20,7 +21,6 @@
  * 02110-1301 USA, or see the FSF site: http://www.fsf.org.
 -->
 
-<xwikidoc version="1.5" reference="FeedbackFormCode.FeedbackForm" locale="">
   <web>FeedbackFormCode</web>
   <name>FeedbackForm</name>
   <language/>
@@ -355,24 +355,28 @@ require(['jquery'], function($) {
     return Math.floor(size) + ' ' + FILE_SIZE_UNITS[unitIndex];
   }
 
-  function getFeedbackModal() {
+  function getFeedbackModal(displayedTitle) {
     $("#feedback-modal").remove()
+    const title = displayedTitle || $jsontool.serialize($services.localization.render('feedbackform.title'));
+    const type = $jsontool.serialize($services.localization.render('feedbackform.type'));
+    const consentMessage = $jsontool.serialize($services.localization.render('feedbackform.consentMessage'));
+    const sendFeedback = $jsontool.serialize($services.localization.render('feedbackform.sendFeedback'));
     const feedbackModal = $(`
       &lt;div id="feedback-modal" class="modal fade" role="dialog"&gt;
         &lt;div class="modal-dialog modal-lg"&gt;
           &lt;div class="modal-content"&gt;
             &lt;div class="modal-header"&gt;
-              &lt;button type="button" class="close" data-dismiss="modal"&gt;&amp;times;&lt;/button&gt;
-              &lt;h4 class="modal-title"&gt;$services.localization.render('feedbackform.title')&lt;/h4&gt;
+              &lt;button type="button" class="close" data-dismiss="modal"&gt;×&lt;/button&gt;
+              &lt;h4 class="modal-title"&gt;#[[${title}]]#&lt;/h4&gt;
             &lt;/div&gt;
             &lt;form id="feedback-form" enctype="multipart/form-data"&gt;
               &lt;div class="modal-body"&gt;
                 &lt;div id="feedback-modal-type-choice" class="form-group"&gt;
-                  &lt;label for="feedbackTypeChoice"&gt;$services.localization.render('feedbackform.type')&lt;/label&gt;
+                  &lt;label for="feedbackTypeChoice"&gt;#[[${type}]]#&lt;/label&gt;
                   &lt;select class="form-control" id="feedbackTypeChoice"&gt;
                     #foreach($type in $config.getValue('publicFeedbackTypes'))
-                      &lt;option value="$escapetool.xml($type)"&gt;
-                        $escapetool.xml($xwiki.getDocument($type).getObject('FeedbackFormCode.FeedbackTypeClass').getValue("type"))
+                      &lt;option value="$escapetool.xml($type).replace('$', '&amp;#36;').replace('\', '&amp;#92;')"&gt;
+                        $escapetool.xml($xwiki.getDocument($type).getObject('FeedbackFormCode.FeedbackTypeClass').getValue("type")).replace('$', '&amp;#36;').replace('\', '&amp;#92;')
                       &lt;/option&gt;
                     #end
                   &lt;/select&gt;
@@ -382,13 +386,13 @@ require(['jquery'], function($) {
                 &lt;p class="form-group" id="feedback-modal-browser-env"&gt;
                   &lt;label class="checkbox-inline"&gt;
                     &lt;input type="checkbox" name="" id="provideBrowserData" /&gt;
-                    $services.localization.render('feedbackform.consentMessage')
+                    ${consentMessage}
                   &lt;/label&gt;
                 &lt;/p&gt;
               &lt;/div&gt;
               &lt;div class="modal-footer"&gt;
                 &lt;button type="submit" class="btn btn-primary pull-left" id="submitFeedbackButton"&gt;
-                  $services.localization.render('feedbackform.sendFeedback')
+                  ${sendFeedback}
                 &lt;/button&gt;
               &lt;/div&gt;
               &lt;input type="hidden" name="type" id="feedback-modal-type" /&gt;
@@ -616,7 +620,7 @@ require(['jquery'], function($) {
     $.get(feedbackUrl('load', false, {type: config.type}), function(data) {
       data = $(data);
 
-      const feedbackModal = getFeedbackModal();
+      const feedbackModal = getFeedbackModal(config.modalTitle);
       const content = $('#feedback-modal-content');
       content.empty().append(data);
 
