@@ -1,0 +1,454 @@
+<?xml version="1.1" encoding="UTF-8"?>
+
+<!--
+ * See the NOTICE file distributed with this work for additional
+ * information regarding copyright ownership.
+ *
+ * This is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as
+ * published by the Free Software Foundation; either version 2.1 of
+ * the License, or (at your option) any later version.
+ *
+ * This software is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with this software; if not, write to the Free
+ * Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
+ * 02110-1301 USA, or see the FSF site: http://www.fsf.org.
+-->
+
+<xwikidoc version="1.5" reference="FeedbackFormCode.WebsiteFeedbackSheet" locale="">
+  <web>FeedbackFormCode</web>
+  <name>WebsiteFeedbackSheet</name>
+  <language/>
+  <defaultLanguage/>
+  <translation>0</translation>
+  <creator>xwiki:XWiki.Admin</creator>
+  <parent>WebHome</parent>
+  <author>xwiki:XWiki.Admin</author>
+  <originalMetadataAuthor>xwiki:XWiki.Admin</originalMetadataAuthor>
+  <contentAuthor>xwiki:XWiki.Admin</contentAuthor>
+  <version>1.1</version>
+  <title/>
+  <comment/>
+  <minorEdit>false</minorEdit>
+  <syntaxId>xwiki/2.1</syntaxId>
+  <hidden>true</hidden>
+  <content>{{velocity}}
+#set($isEditMode = $xcontext.getDisplayMode() == "edit")
+#macro(display $field $xObj $labelClass $formGroupClass)
+  #if($isEditMode)
+    &lt;div data-feedback-required-field="true" class="form-group $formGroupClass"&gt;
+    &lt;label #if($labelClass != "")class="$labelClass"#end for="${xObj.getXWikiObject().getClassName()}_$xObj.getNumber()_$field"&gt;
+  #else
+    &lt;th&gt;
+  #end
+  $services.localization.render("feedbackform.types.website.field.$field")##
+  #if($isEditMode)
+    &lt;span class="mandatory-field"&gt;*&lt;/span&gt;&lt;/label&gt;
+  #else
+    &lt;/th&gt;&lt;td&gt;
+  #end
+  {{/html}}##
+  $doc.display($field, $xObj)##
+  {{html clean="false" wiki="false"}}
+  #if($isEditMode)
+    &lt;/div&gt;
+  #else
+    &lt;/td&gt;&lt;/tr&gt;
+  #end
+#end
+#set($xObj = $doc.getObject("FeedbackFormCode.WebsiteFeedbackType"))
+{{html clean="false" wiki="false"}}
+#if($isEditMode)
+  &lt;div class="box infomessage"&gt;
+    $services.localization.render('feedbackform.introText')
+  &lt;/div&gt;
+  &lt;hr /&gt;
+#else
+  &lt;table&gt;
+#end
+#if(!$isEditMode || $isGuest)
+  #display("title", $xObj, "d-block")
+  #if($isEditMode)
+  &lt;div class="row"&gt;
+  #end
+      #display("firstName", $xObj, "", "col-md-6")
+      #display("lastName", $xObj, "", "col-md-6")
+  #if($isEditMode)
+  &lt;/div&gt;
+  #end
+  #display("email", $xObj, "", "")
+  #if($isEditMode)
+  &lt;hr /&gt;
+  #end
+#end
+#display("subject", $xObj, "", "")
+#display("message", $xObj, "", "")
+#if(!$isEditMode)
+&lt;/table&gt;
+#end
+{{/html}}##
+#if(!$isEditMode)
+{{include reference="FeedbackFormCode.FeedbackMetadataClassSheet" /}}
+#end
+##{{/velocity}}
+</content>
+  <object>
+    <name>FeedbackFormCode.WebsiteFeedbackSheet</name>
+    <number>0</number>
+    <className>FeedbackFormCode.FeedbackMetadataClass</className>
+    <guid>03de8ff9-efc3-4370-b789-fb42dfbd78cc</guid>
+    <class>
+      <name>FeedbackFormCode.FeedbackMetadataClass</name>
+      <customClass/>
+      <customMapping/>
+      <defaultViewSheet/>
+      <defaultEditSheet/>
+      <defaultWeb/>
+      <nameField/>
+      <validationScript/>
+      <emailsRecipients>
+        <cache>0</cache>
+        <classname/>
+        <customDisplay/>
+        <defaultValue/>
+        <disabled>0</disabled>
+        <displayType>input</displayType>
+        <freeText>allowed</freeText>
+        <hint/>
+        <idField/>
+        <largeStorage>0</largeStorage>
+        <multiSelect>1</multiSelect>
+        <name>emailsRecipients</name>
+        <number>2</number>
+        <picker>1</picker>
+        <prettyName>emailsRecipients</prettyName>
+        <relationalStorage>0</relationalStorage>
+        <separator/>
+        <separators/>
+        <size>1</size>
+        <sort/>
+        <sql/>
+        <unmodifiable>0</unmodifiable>
+        <validationMessage>Invalid email</validationMessage>
+        <validationRegExp>/^(([^@\s]+)@((?:[-a-zA-Z0-9]+\.)+[a-zA-Z]{2,}))?$/</validationRegExp>
+        <valueField/>
+        <classType>com.xpn.xwiki.objects.classes.DBListClass</classType>
+      </emailsRecipients>
+      <page>
+        <cache>0</cache>
+        <classname/>
+        <customDisplay/>
+        <defaultValue/>
+        <disabled>0</disabled>
+        <displayType>input</displayType>
+        <freeText/>
+        <hint/>
+        <idField/>
+        <largeStorage>0</largeStorage>
+        <multiSelect>0</multiSelect>
+        <name>page</name>
+        <number>7</number>
+        <picker>1</picker>
+        <prettyName>page</prettyName>
+        <relationalStorage>0</relationalStorage>
+        <separator> </separator>
+        <separators/>
+        <size>1</size>
+        <sort/>
+        <sql/>
+        <unmodifiable>0</unmodifiable>
+        <validationMessage/>
+        <validationRegExp/>
+        <valueField/>
+        <classType>com.xpn.xwiki.objects.classes.PageClass</classType>
+      </page>
+      <referrer>
+        <customDisplay/>
+        <disabled>0</disabled>
+        <hint/>
+        <name>referrer</name>
+        <number>5</number>
+        <picker>1</picker>
+        <prettyName>referrer</prettyName>
+        <size>30</size>
+        <unmodifiable>0</unmodifiable>
+        <validationMessage/>
+        <validationRegExp/>
+        <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
+      </referrer>
+      <reporter>
+        <cache>0</cache>
+        <customDisplay/>
+        <defaultValue/>
+        <disabled>0</disabled>
+        <displayType>input</displayType>
+        <freeText>forbidden</freeText>
+        <hint/>
+        <largeStorage>0</largeStorage>
+        <multiSelect>0</multiSelect>
+        <name>reporter</name>
+        <number>8</number>
+        <picker>1</picker>
+        <prettyName>Reporter</prettyName>
+        <relationalStorage>0</relationalStorage>
+        <separator> </separator>
+        <separators/>
+        <size>20</size>
+        <sort/>
+        <unmodifiable>0</unmodifiable>
+        <usesList>1</usesList>
+        <validationMessage/>
+        <validationRegExp/>
+        <classType>com.xpn.xwiki.objects.classes.UsersClass</classType>
+      </reporter>
+      <reporterEmail>
+        <customDisplay/>
+        <disabled>0</disabled>
+        <hint/>
+        <name>reporterEmail</name>
+        <number>9</number>
+        <picker>1</picker>
+        <prettyName>reporterEmail</prettyName>
+        <size>30</size>
+        <unmodifiable>0</unmodifiable>
+        <validationMessage/>
+        <validationRegExp>/^(([^@\s]+)@((?:[-a-zA-Z0-9]+\.)+[a-zA-Z]{2,}))?$/</validationRegExp>
+        <classType>com.xpn.xwiki.objects.classes.EmailClass</classType>
+      </reporterEmail>
+      <screenResolution>
+        <customDisplay/>
+        <disabled>0</disabled>
+        <hint/>
+        <name>screenResolution</name>
+        <number>6</number>
+        <picker>1</picker>
+        <prettyName>screenResolution</prettyName>
+        <size>30</size>
+        <unmodifiable>0</unmodifiable>
+        <validationMessage/>
+        <validationRegExp/>
+        <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
+      </screenResolution>
+      <type>
+        <customDisplay/>
+        <disabled>0</disabled>
+        <hint/>
+        <name>type</name>
+        <number>1</number>
+        <picker>0</picker>
+        <prettyName>type</prettyName>
+        <size>30</size>
+        <unmodifiable>0</unmodifiable>
+        <validationMessage/>
+        <validationRegExp/>
+        <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
+      </type>
+      <url>
+        <customDisplay/>
+        <disabled>0</disabled>
+        <hint/>
+        <name>url</name>
+        <number>4</number>
+        <picker>1</picker>
+        <prettyName>url</prettyName>
+        <size>30</size>
+        <unmodifiable>0</unmodifiable>
+        <validationMessage/>
+        <validationRegExp/>
+        <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
+      </url>
+      <userAgent>
+        <customDisplay/>
+        <disabled>0</disabled>
+        <hint/>
+        <name>userAgent</name>
+        <number>5</number>
+        <picker>1</picker>
+        <prettyName>userAgent</prettyName>
+        <size>30</size>
+        <unmodifiable>0</unmodifiable>
+        <validationMessage/>
+        <validationRegExp/>
+        <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
+      </userAgent>
+      <usersRecipients>
+        <cache>0</cache>
+        <customDisplay/>
+        <defaultValue/>
+        <disabled>0</disabled>
+        <displayType>input</displayType>
+        <freeText/>
+        <hint/>
+        <largeStorage>0</largeStorage>
+        <multiSelect>1</multiSelect>
+        <name>usersRecipients</name>
+        <number>10</number>
+        <picker>1</picker>
+        <prettyName>usersRecipients</prettyName>
+        <relationalStorage>0</relationalStorage>
+        <separator/>
+        <separators/>
+        <size>20</size>
+        <sort/>
+        <unmodifiable>0</unmodifiable>
+        <usesList>0</usesList>
+        <validationMessage/>
+        <validationRegExp/>
+        <classType>com.xpn.xwiki.objects.classes.UsersClass</classType>
+      </usersRecipients>
+    </class>
+    <property>
+      <emailsRecipients/>
+    </property>
+    <property>
+      <page/>
+    </property>
+    <property>
+      <referrer/>
+    </property>
+    <property>
+      <reporter/>
+    </property>
+    <property>
+      <reporterEmail/>
+    </property>
+    <property>
+      <screenResolution/>
+    </property>
+    <property>
+      <type/>
+    </property>
+    <property>
+      <url/>
+    </property>
+    <property>
+      <userAgent/>
+    </property>
+    <property>
+      <usersRecipients/>
+    </property>
+  </object>
+  <object>
+    <name>FeedbackFormCode.WebsiteFeedbackSheet</name>
+    <number>0</number>
+    <className>FeedbackFormCode.WebsiteFeedbackType</className>
+    <guid>e7d57f1a-c984-463c-8028-70230049ea62</guid>
+    <class>
+      <name>FeedbackFormCode.WebsiteFeedbackType</name>
+      <customClass/>
+      <customMapping/>
+      <defaultViewSheet/>
+      <defaultEditSheet/>
+      <defaultWeb/>
+      <nameField/>
+      <validationScript/>
+      <firstName>
+        <customDisplay/>
+        <disabled>0</disabled>
+        <hint/>
+        <name>firstName</name>
+        <number>2</number>
+        <picker>0</picker>
+        <prettyName>First name</prettyName>
+        <size>30</size>
+        <unmodifiable>0</unmodifiable>
+        <validationMessage/>
+        <validationRegExp/>
+        <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
+      </firstName>
+      <lastName>
+        <customDisplay/>
+        <disabled>0</disabled>
+        <hint/>
+        <name>lastName</name>
+        <number>3</number>
+        <picker>0</picker>
+        <prettyName>Last name</prettyName>
+        <size>30</size>
+        <unmodifiable>0</unmodifiable>
+        <validationMessage/>
+        <validationRegExp/>
+        <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
+      </lastName>
+      <message>
+        <contenttype>PureText</contenttype>
+        <customDisplay/>
+        <disabled>0</disabled>
+        <editor>PureText</editor>
+        <hint/>
+        <name>message</name>
+        <number>6</number>
+        <picker>1</picker>
+        <prettyName>Message</prettyName>
+        <rows>5</rows>
+        <size>40</size>
+        <unmodifiable>0</unmodifiable>
+        <validationMessage/>
+        <validationRegExp/>
+        <classType>com.xpn.xwiki.objects.classes.TextAreaClass</classType>
+      </message>
+      <subject>
+        <customDisplay/>
+        <disabled>0</disabled>
+        <hint/>
+        <name>subject</name>
+        <number>5</number>
+        <picker>0</picker>
+        <prettyName>Subject</prettyName>
+        <size>30</size>
+        <unmodifiable>0</unmodifiable>
+        <validationMessage/>
+        <validationRegExp/>
+        <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
+      </subject>
+      <title>
+        <cache>0</cache>
+        <customDisplay/>
+        <defaultValue>other</defaultValue>
+        <disabled>0</disabled>
+        <displayType>input</displayType>
+        <freeText>allowed</freeText>
+        <hint/>
+        <largeStorage>0</largeStorage>
+        <multiSelect>0</multiSelect>
+        <name>title</name>
+        <number>1</number>
+        <picker>1</picker>
+        <prettyName>Title</prettyName>
+        <relationalStorage>0</relationalStorage>
+        <separator> </separator>
+        <separators>|, </separators>
+        <size>1</size>
+        <sort/>
+        <unmodifiable>0</unmodifiable>
+        <validationMessage/>
+        <validationRegExp/>
+        <values>mr|ms|other</values>
+        <classType>com.xpn.xwiki.objects.classes.StaticListClass</classType>
+      </title>
+    </class>
+    <property>
+      <email/>
+    </property>
+    <property>
+      <firstName/>
+    </property>
+    <property>
+      <lastName/>
+    </property>
+    <property>
+      <message/>
+    </property>
+    <property>
+      <subject/>
+    </property>
+    <property>
+      <title/>
+    </property>
+  </object>
+</xwikidoc>

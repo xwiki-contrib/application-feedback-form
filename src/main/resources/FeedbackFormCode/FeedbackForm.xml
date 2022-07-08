@@ -20,7 +20,7 @@
  * 02110-1301 USA, or see the FSF site: http://www.fsf.org.
 -->
 
-<xwikidoc version="1.4" reference="FeedbackFormCode.FeedbackForm" locale="">
+<xwikidoc version="1.5" reference="FeedbackFormCode.FeedbackForm" locale="">
   <web>FeedbackFormCode</web>
   <name>FeedbackForm</name>
   <language/>
@@ -29,6 +29,7 @@
   <creator>xwiki:XWiki.Admin</creator>
   <parent>WebHome</parent>
   <author>xwiki:XWiki.Admin</author>
+  <originalMetadataAuthor>xwiki:XWiki.Admin</originalMetadataAuthor>
   <contentAuthor>xwiki:XWiki.Admin</contentAuthor>
   <version>1.1</version>
   <title/>
@@ -37,81 +38,6 @@
   <syntaxId>xwiki/2.1</syntaxId>
   <hidden>true</hidden>
   <content>{{velocity output="false"}}
-#macro(createFeedbackFormModal)
-  #set ($macro.feedbackTypes = ['website', 'currentPage', 'other'])
-  &lt;div id="feedbackformModal" class="modal fade feedbackform-modal" role="dialog"&gt;
-    &lt;div class="modal-dialog modal-lg"&gt;
-      &lt;div class="modal-content"&gt;
-        &lt;div class="modal-header"&gt;
-          &lt;button type="button" class="close" data-dismiss="modal"&gt;&amp;times;&lt;/button&gt;
-          &lt;h4 class="modal-title"&gt;$services.localization.render('feedbackform.title')&lt;/h4&gt;
-        &lt;/div&gt;
-        &lt;form id="feedbackForm" enctype="multipart/form-data"&gt;
-          &lt;div class="modal-body"&gt;
-            &lt;div class="box infomessage"&gt;
-              $services.localization.render('feedbackform.intoText')
-            &lt;/div&gt;
-            &lt;div class="form-group"&gt;
-              &lt;label for="feedbackType"&gt;$services.localization.render('feedbackform.type')&lt;/label&gt;
-              &lt;select class="form-control" id="feedbackType" name="feedbackType"&gt;
-                #foreach($type in $macro.feedbackTypes)
-                  &lt;option value="$escapetool.xml($type)"&gt;$services.localization.render("feedbackform.type.${type}")&lt;/option&gt;
-                #end
-              &lt;/select&gt;
-            &lt;/div&gt;
-            &lt;hr/&gt;
-            &lt;div class="form-group"&gt;
-              &lt;label class="d-block"&gt;$services.localization.render('feedbackform.user.title')&lt;span class="mandatory-field"&gt;*&lt;/span&gt;&lt;/label&gt;
-              &lt;label class="radio-inline" for="feedbackUserTitle1"&gt;
-                &lt;input type="radio" name="feedbackUserTitle" value="mrs" /&gt;$services.localization.render('feedbackform.user.mrs')
-              &lt;/label&gt;
-              &lt;label class="radio-inline" for="feedbackUserTitle2"&gt;
-                &lt;input type="radio" name="feedbackUserTitle" value="mr" /&gt;$services.localization.render('feedbackform.user.mr')
-              &lt;/label&gt;
-            &lt;/div&gt;
-            &lt;div class="row"&gt;
-              &lt;div class="form-group col-md-6"&gt;
-                &lt;label for="feedbackUserFirstName"&gt;$services.localization.render('feedbackform.user.firstName') &lt;span class="mandatory-field"&gt;*&lt;/span&gt;&lt;/label&gt;
-                &lt;input type="text" class="form-control" id="feedbackUserFirstName" name="feedbackUserFirstName" required /&gt;
-              &lt;/div&gt;
-              &lt;div class="form-group col-md-6"&gt;
-                &lt;label for="feedbackUserLastName"&gt;$services.localization.render('feedbackform.user.lastName') &lt;span class="mandatory-field"&gt;*&lt;/span&gt;&lt;/label&gt;
-                &lt;input type="text" class="form-control" id="feedbackUserLastName" name="feedbackUserLastName" required /&gt;
-              &lt;/div&gt;
-            &lt;/div&gt;
-            &lt;div class="form-group"&gt;
-              &lt;label for="feedbackUserEmail"&gt;$services.localization.render('feedbackform.user.email') &lt;span class="mandatory-field"&gt;*&lt;/span&gt;&lt;/label&gt;
-              &lt;input type="email" class="form-control" id="feedbackUserEmail" name="feedbackUserEmail" required /&gt;
-            &lt;/div&gt;
-            &lt;/hr&gt;
-            &lt;div class="form-group"&gt;
-              &lt;label for="feedbackSubject"&gt;$services.localization.render('feedbackform.subject') &lt;span class="mandatory-field"&gt;*&lt;/span&gt;&lt;/label&gt;
-              &lt;input type="text" class="form-control" id="feedbackSubject" name="feedbackSubject" required /&gt;
-            &lt;/div&gt;
-            &lt;div class="form-group"&gt;
-              &lt;label for="feedbackMessage"&gt;$services.localization.render('feedbackform.message') &lt;span class="mandatory-field"&gt;*&lt;/span&gt;&lt;/label&gt;
-              &lt;textarea id="feedbackMessage" name="feedbackMessage" class="form-control" required&gt;&lt;/textarea&gt;
-            &lt;/div&gt;
-            &lt;div class="form-group"&gt;
-              &lt;label for="feedbackFile"&gt;$services.localization.render('feedbackform.attachment')&lt;/label&gt;
-              &lt;input type="file" class="form-control" id="feedbackFile" name="feedbackFile" accept=".jpg, .jpeg, .png, .pdf" /&gt;
-            &lt;/div&gt;
-            &lt;hr/&gt;
-            &lt;div class="form-group"&gt;
-              &lt;label class="checkbox-inline"&gt;
-                &lt;input type="checkbox" name="" id="provideBrowserData" /&gt;$services.localization.render('feedbackform.consentMessage')
-              &lt;/label&gt;
-            &lt;/div&gt;
-          &lt;/div&gt;
-          &lt;div class="modal-footer"&gt;
-            &lt;button type="submit" class="btn btn-primary pull-left" id="submitFeedbackButton"&gt;$services.localization.render('feedbackform.sendFeedback')&lt;/button&gt;
-          &lt;/div&gt;
-        &lt;/form&gt;
-      &lt;/div&gt;
-    &lt;/div&gt;
-  &lt;/div&gt;
-#end
-#####
 #macro(validateFeedbackFormData $isValid)
   #set ($macro.isValid = true)
   #set ($macro.mandatoryFields = ['feedbackType', 'feedbackUserTitle', 'feedbackUserFirstName', 'feedbackUserLastName', 'feedbackUserEmail', 'feedbackSubject', 'feedbackMessage'])
@@ -137,11 +63,11 @@
   #set ($isValid = $NULL)
   #setVariable("$isValid" $macro.isValid)
 #end
-#####
+
 #macro(checkEmailSendingStatus $mailResultObj $emailStatus)
   #set ($macro.emailStatus = true)
   ## Check if the message was created properly and if we have permissions to send emails
-  #set ($macro.emailErrorMessage = "An error occurred while sending feedback form email, Error : {}")
+  #set ($macro.emailErrorMessage = $services.localization.render('feedbackform.sendingEmailFeedbackError'))
   #if ($services.mail.sender.lastError)
     #set ($macro.emailStatus = false)
     #set ($discard = $logger.error($macro.emailErrorMessage, $exceptiontool.getStackTrace($services.mail.sender.lastError)))
@@ -156,7 +82,7 @@
   #set ($emailStatus = $NULL)
   #setVariable("$emailStatus" $macro.emailStatus)
 #end
-#####
+
 #macro(getSenderEmail $senderEmail)
   #set ($feedbackFormConfigurationObj = $xwiki.getDocument('FeedbackFormCode.Configuration').getObject('FeedbackFormCode.ConfigurationClass'))
   #set ($macro.email = $feedbackFormConfigurationObj.getProperty('platformSenderEmail').value)
@@ -166,7 +92,7 @@
   #set ($senderEmail = $NULL)
   #setVariable("$senderEmail" $macro.email)
 #end
-#####
+
 #macro(getFeedbackRecipientEmail $recipientEmail)
   #set ($feedbackFormConfigurationObj = $xwiki.getDocument('FeedbackFormCode.Configuration').getObject('FeedbackFormCode.ConfigurationClass'))
   #set ($macro.email = $feedbackFormConfigurationObj.getProperty('feedbackRecipientEmail').value)
@@ -176,37 +102,13 @@
   #set ($recipientEmail = $NULL)
   #setVariable("$recipientEmail" $macro.email)
 #end
-#####
-#macro(sendFeedback)
-  #validateFeedbackFormData($doSend)
-  #if (!$doSend)
-    $jsontool.serialize({"status" : false, "message" : $services.localization.render('feedbackform.invalidFormData')})
-    #break
-  #end
-  #set ($logger = $services.logging.getLogger('SendFeedbackForm'))
-  ## Send a mail to wiki and to the user who added the feedback with a summary of the feedback
-  #set ($macro.templateReference = $services.model.createDocumentReference('', 'FeedbackFormCode', 'FeedbackFormMailTemplate'))
-  #set ($macro.velocityVariables = {
-    'feedbackType' : $request.feedbackType,
-    'feedbackUserTitle' : $request.feedbackUserTitle,
-    'feedbackUserFirstName' : $request.feedbackUserFirstName,
-    'feedbackUserLastName' : $request.feedbackUserLastName,
-    'feedbackUserEmail' : $request.feedbackUserEmail,
-    'feedbackSubject' : $request.feedbackSubject,
-    'feedbackMessage' : $request.feedbackMessage,
-    'contextLocale' : $xcontext.locale,
-    'pageURL' : $request.pageURL,
-    'referrer' : $request.referrer,
-    'userAgent' : $request.userAgent,
-    'screenResolution' : $request.screenResolution,
-    'mailRecipient' : 'wiki'
-  })
-  #if ("$!request.referrer" != '' ||
-    "$!request.userAgent" != '' ||
-    "$!request.screenResolution" != '')
-     #set ($discard = $macro.velocityVariables.put('environment', true))
-  #end
-  #set ($macro.mailParameters = {'language' : 'en', 'velocityVariables' : $macro.velocityVariables})
+
+## Send a mail to wiki and to the user who added the feedback with a summary of the feedback
+#macro(sendMail $velocityVariables $confirmationMessage $emailSent)
+  #set ($macro.templateReference = $xwiki.getDocument($velocityVariables.emailTemplate).documentReference)
+  #set ($macro.mailParameters = {'language' : 'en', 'velocityVariables' : $velocityVariables})
+  #set ($discard = $macro.mailParameters.velocityVariables.put('contextLocale', $xcontext.locale))
+  #set ($discard = $macro.mailParameters.velocityVariables.put('mailRecipient', 'wiki'))
   ## Add the attachment to the mail
   #if ("$!xwiki.fileupload.getFileItems()" != '' &amp;&amp; $xwiki.fileupload.getFileItems().size() &gt; 0)
     #foreach($item in $xwiki.fileupload.getFileItems())
@@ -220,41 +122,129 @@
   #end
   ##
   #getSenderEmail($senderEmail)
-  #getFeedbackRecipientEmail($feedbackRecipientEmail)
   #set ($macro.message = $services.mail.sender.createMessage('template', $macro.templateReference, $macro.mailParameters))
   #set ($discard = $macro.message.setFrom($senderEmail))
-  #set ($discard = $macro.message.addRecipient('to', $feedbackRecipientEmail))
+  #foreach ($recipient in $velocityVariables.emailsRecipients)
+    #set ($discard = $macro.message.addRecipient('to', $recipient))
+  #end
   #set ($mailResult = $services.mail.sender.send($macro.message))
+  #set ($emailSent = $NULL)
   #checkEmailSendingStatus($mailResult $emailSent)
   #if ($emailSent)
-    $jsontool.serialize({"status" : true, "message" : $services.localization.render('feedbackform.confirmationMessage')})
-    ## Send email to user who added the feedback
-    #set ($discard = $macro.mailParameters.velocityVariables.put('mailRecipient', 'user'))
-    #set ($discard = $macro.mailParameters.velocityVariables.put('environment', false))
-    #set ($macro.message = $services.mail.sender.createMessage('template', $macro.templateReference, $macro.mailParameters))
-    #set ($discard = $macro.message.setFrom($senderEmail))
-    #set ($discard = $macro.message.addRecipient('to', $request.feedbackUserEmail))
-    #set ($mailResult = $services.mail.sender.send($macro.message))
-    #checkEmailSendingStatus($mailResult $emailSent)
+    #set($feedbackUserEmail = $velocityVariables.feedbackDoc.getValue("reporterEmail"))
+    #if ("$!feedbackUserEmail" == "" &amp;&amp; !$isGuest)
+      #set($feedbackUserEmail = $xwiki.getDocument($xcontext.getUserReference()).getValue('email'))
+    #end
+    {"status": true, "message": $jsontool.serialize($confirmationMessage)}
+    ## Send email to the user who added the feedback
+    #if ("$!feedbackUserEmail" != "")
+      #set ($discard = $macro.mailParameters.velocityVariables.put('mailRecipient', 'user'))
+      #set ($macro.message = $services.mail.sender.createMessage('template', $macro.templateReference, $macro.mailParameters))
+      #set ($discard = $macro.message.setFrom($senderEmail))
+      #set ($discard = $macro.message.addRecipient('to', $feedbackUserEmail))
+      #set ($mailResult = $services.mail.sender.send($macro.message))
+    #end
   #else
-    $jsontool.serialize({"status" : false, "message" : $services.localization.render('feedbackform.sendingFeedbackError')})
+    {"status": false, "message": $jsontool.serialize($services.localization.render('feedbackform.sendingFeedbackError'))}
+  #end
+#end
+
+#macro(submitFeedback)
+  $response.setContentType('application/json')
+  #set ($type = $request.type)
+  #set ($feedbackTypeObj = $xwiki.getDocument($type).getObject("FeedbackFormCode.FeedbackTypeClass"))
+  #if (!$!feedbackTypeObj)
+    {"status": false, "message": "Error: Wrong feedback type."}
+    #break
+  #end
+  #set ($shortType = $feedbackTypeObj.getValue("type"))
+  #set ($config = $xwiki.getDocument("FeedbackFormCode.Configuration").getObject("FeedbackFormCode.ConfigurationClass"))
+  #set ($space = "${config.getValue('feedbackSpace')}.$shortType")
+  #set ($date = $xwiki.jodatime.getDateTime().toString('YYY-MM-dd_HH\:mm\:ss'))
+  #set ($user = $xcontext.user)
+  #set ($escapedUser = $stringtool.replace($user, ".", "\."))
+  #set ($feedbackDoc = $xwiki.getDocument("$space", "${space}.${date}-${escapedUser}"))
+  #set ($discard = $feedbackDoc.addObjectFromRequest("FeedbackFormCode.FeedbackMetadataClass"))
+  #getFeedbackRecipientEmail($feedbackRecipientEmail)
+  #set ($feedbackMetadata = $feedbackDoc.getObject("FeedbackFormCode.FeedbackMetadataClass"))
+  $feedbackMetadata.set("reporter", $user)
+  $feedbackMetadata.set("type", $type)
+  $feedbackMetadata.set("emailsRecipients", [$feedbackRecipientEmail])
+  $feedbackMetadata.set("usersRecipients", [])
+  #set ($discard = $feedbackDoc.addObjectFromRequest($type))
+  #set ($validateAndCustomizeSubmission = $feedbackTypeObj.getValue("validateAndCustomizeSubmission"))
+  #if ("$!validateAndCustomizeSubmission" != "")
+    #evaluate($validateAndCustomizeSubmission)
+  #end
+  #if ("$!cancelSubmission" != "")
+    {"status": false, "message": $jsontool.serialize("$!cancelSubmission")}
+    #break
+  #end
+  #if ("$config.getValue('saveToWiki')" == "1")
+    ## this needs to be done after submission customization and before
+    ## sending mails so mail templates can retrieve the feedback document URL.
+    #set ($discard = $feedbackDoc.save())
+  #end
+  #set ($emailsRecipients = [])
+  #foreach($emailRecipient in $stringtool.split($!feedbackMetadata.getValue("emailsRecipients"), ","))
+    #set($discard = $emailsRecipients.add($emailRecipient))
+  #end
+  #foreach ($userRecipient in $stringtool.split($!feedbackMetadata.getValue("usersRecipients"), ","))
+    #set ($userRecipientEmail = $xwiki.getDocument($userRecipient.trim()).getValue('email'))
+    #if ("$!userRecipientEmail" != "")
+       #set($discard = $emailsRecipients.add($userRecipientEmail))
+    #end
+  #end
+  #set ($specificConfirmationKey = "feedbackform.types.${shortType}.confirmationMessage")
+  #set ($confirmationMessage = $services.localization.get($specificConfirmationKey))
+  #if ("$!confirmationMessage" == "")
+    #set ($confirmationMessage = $services.localization.render('feedbackform.confirmationMessage'))
+  #else
+    #set ($confirmationMessage = $services.localization.render($specificConfirmationKey))
+  #end
+  #set ($mailTemplate = $feedbackTypeObj.getValue('mailTemplate'))
+  #set ($emailOK = false)
+  $feedbackMetadata.set("emailsRecipients", $emailsRecipients)
+  #if ("$config.getValue('sendByEmail')" == "1" &amp;&amp; "$!mailTemplate" != "" &amp;&amp; "$feedbackMetadata.getValue('usersRecipients')" != "[]")
+    #sendMail({
+      'emailTemplate' : $mailTemplate,
+      'emailsRecipients': $emailsRecipients,
+      'feedbackDoc': $feedbackDoc
+    }, $confirmationMessage, $emailOK)
+  #else
+    #set ($emailOK = true)
+    {"status": true, "message": $jsontool.serialize($confirmationMessage)}
   #end
 #end
 {{/velocity}}
 
 {{velocity}}
 #set ($action = $request.action)
-#set ($reference = $request.reference)
-#if ("$!action" != '' &amp;&amp; "$!request.reference" != '')
-  #if($action == 'loadFeedbackForm')
-    {{html}}
-      #createFeedbackFormModal()
-    {{/html}}
-  #elseif($action == 'sendFeedback')
-    #sendFeedback()
+#if ($action == 'load')
+  #set ($type = "$!request.type")
+  #if ("$type" == "")
+    #set ($type = $xwiki.getDocument("FeedbackFormCode.Configuration").getValue("publicFeedbackTypes")[0])
   #end
+  #set ($typeDoc = $xwiki.getDocument($type))
+  #set ($typeSheet = $typeDoc.getObject('XWiki.ClassSheetBinding').getValue('sheet'))
+  #set ($typeConfig = $typeDoc.getObject('FeedbackFormCode.FeedbackTypeClass'))
+  #set ($discard = $xcontext.setDisplayMode('edit'))
+  {{html clean=false wiki=true}}##
+  &lt;div
+    id="feedback-modal-body-root"
+    data-suggest-sending-browser-env="$typeConfig.getValue('suggestSendingBrowserEnv')"
+    data-send-url="$typeConfig.getValue('sendURL')"
+    data-allowed-file-upload-max-number="$typeConfig.getValue('allowedFileUploadMaxNumber')"
+    data-allowed-file-upload-max-size="$typeConfig.getValue('allowedFileUploadMaxSize')"
+    data-allowed-file-upload-types="$stringtool.join($typeConfig.getValue('allowedFileUploadTypes'), ',')"
+    data-file-upload-required="$typeConfig.getValue('fileUploadRequired')"
+  &gt;{{display reference="$typeSheet" /}}&lt;/div&gt;##
+  {{/html}}
+#elseif($action == 'submit')
+  #submitFeedback()
 #end
-{{/velocity}}</content>
+{{/velocity}}
+</content>
   <attachment>
     <filename>download.gif</filename>
     <mimetype>image/gif</mimetype>
@@ -351,122 +341,442 @@
       <cache>long</cache>
     </property>
     <property>
-      <code>require(['jquery'], function($){
-  var showFeedbackButton = function(){
-    var translation = "$services.localization.render('feedbackform.buttonLabel')";
-    var html = '&lt;a href="#" id="feedback-button" class="feedback-button"&gt;' + translation + '&lt;/a&gt;';
-    html = html + '&lt;div id="fade-bg" class="feedback-form-fade-bg" style="display: none;"&gt;&lt;/div&gt;';
-    html = html + '&lt;div id="feedback-form-loading" class="feedback-form-loading" tabindex="0" style="display: none;"&gt;&lt;/div&gt;';
-    $('body').append(html);
+      <code>/* #set($config = $xwiki.getDocument('FeedbackFormCode.Configuration').getObject('FeedbackFormCode.ConfigurationClass'))
+   #if("$config.getProperty('enabled').value" == "0") Feedback is not enabled #else */
+
+require(['jquery'], function($) {
+  "use strict";
+
+  const GENERAL_FEEDBACK_CLASS_NAME = "FeedbackFormCode.FeedbackMetadataClass";
+  const FILE_SIZE_UNITS = [
+    "$services.localization.render('feedbackform.fileSizeUnit.B')",
+    "$services.localization.render('feedbackform.fileSizeUnit.KB')",
+    "$services.localization.render('feedbackform.fileSizeUnit.MB')",
+    "$services.localization.render('feedbackform.fileSizeUnit.GB')",
+  ];
+
+  let ckeditor = null;
+  let ckInstances = [];
+  let dataset = null;
+
+  function humanSize(size) {
+    let unitIndex = 0;
+    while (size &gt;= 1024 &amp;&amp; unitIndex &lt; FILE_SIZE_UNITS.length) {
+      unitIndex++;
+      size /= 1024;
+    }
+
+    return Math.floor(size) + ' ' + FILE_SIZE_UNITS[unitIndex];
+  }
+
+  function getFeedbackModal(displayedTitle) {
+    $("#feedback-modal").remove()
+    const title = displayedTitle || $jsontool.serialize($services.localization.render('feedbackform.title'));
+    const type = $jsontool.serialize($services.localization.render('feedbackform.type'));
+    const consentMessage = $jsontool.serialize($services.localization.render('feedbackform.consentMessage'));
+    const sendFeedback = $jsontool.serialize($services.localization.render('feedbackform.sendFeedback'));
+    const feedbackModal = $(`
+      &lt;div id="feedback-modal" class="modal fade" role="dialog"&gt;
+        &lt;div class="modal-dialog modal-lg"&gt;
+          &lt;div class="modal-content"&gt;
+            &lt;div class="modal-header"&gt;
+              &lt;button type="button" class="close" data-dismiss="modal"&gt;×&lt;/button&gt;
+              &lt;h4 class="modal-title"&gt;#[[${title}]]#&lt;/h4&gt;
+            &lt;/div&gt;
+            &lt;form id="feedback-form" enctype="multipart/form-data"&gt;
+              &lt;div class="modal-body"&gt;
+                &lt;div id="feedback-modal-type-choice" class="form-group"&gt;
+                  &lt;label for="feedbackTypeChoice"&gt;#[[${type}]]#&lt;/label&gt;
+                  &lt;select class="form-control" id="feedbackTypeChoice"&gt;
+                    #foreach($type in $config.getValue('publicFeedbackTypes'))
+                      &lt;option value="$escapetool.xml($type).replace('$', '&amp;#36;').replace('\', '&amp;#92;')"&gt;
+                        #set($typeLabel = $xwiki.getDocument($type).getObject('FeedbackFormCode.FeedbackTypeClass').getValue("type"))
+                        $escapetool.xml($services.localization.render("feedbackform.type.$typeLabel")).replace('$', '&amp;#36;').replace('\', '&amp;#92;')
+                      &lt;/option&gt;
+                    #end
+                  &lt;/select&gt;
+                &lt;/div&gt;
+                &lt;div id="feedback-modal-content"&gt;&lt;/div&gt;
+                &lt;p id="feedback-file-group"&gt;&lt;/p&gt;
+                &lt;p class="form-group" id="feedback-modal-browser-env"&gt;
+                  &lt;label class="checkbox-inline"&gt;
+                    &lt;input type="checkbox" name="" id="provideBrowserData" /&gt;
+                    ${consentMessage}
+                  &lt;/label&gt;
+                &lt;/p&gt;
+              &lt;/div&gt;
+              &lt;div class="modal-footer"&gt;
+                &lt;button type="submit" class="btn btn-primary pull-left" id="submitFeedbackButton"&gt;
+                  ${sendFeedback}
+                &lt;/button&gt;
+              &lt;/div&gt;
+              &lt;input type="hidden" name="type" id="feedback-modal-type" /&gt;
+            &lt;/form&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;`
+    );
+
+    $('body').append(feedbackModal);
+    $('#feedback-form').submit(function(event) {
+      event.preventDefault();
+      for (const instance of ckInstances) {
+        instance.updateElement();
+      }
+
+      const fileInput = document.getElementById("feedback-modal-file");
+      const allowedFileUploadMaxSize = parseInt(dataset.allowedFileUploadMaxSize) || 0;
+      const allowedFileUploadMaxNumber = parseInt(dataset.allowedFileUploadMaxNumber) || 0;
+      if (fileInput) {
+        const fileCount = fileInput.files.length;
+        if (allowedFileUploadMaxNumber !== -1 &amp;&amp; fileCount &gt; allowedFileUploadMaxNumber) {
+          new XWiki.widgets.Notification(
+            "$services.localization.render('feedbackform.tooManyFiles')"
+              .replace("{0}", fileCount)
+              .replace("{1}", allowedFileUploadMaxNumber),
+            "error"
+          );
+          return;
+        }
+
+        if (allowedFileUploadMaxSize !== -1) {
+          let size = 0;
+
+          for (const file of fileInput.files) {
+            size += file.size;
+          }
+
+          if (size &gt; allowedFileUploadMaxSize) {
+            const msg = (
+              allowedFileUploadMaxNumber === 1
+                ? "$services.localization.render('feedbackform.maxFileSizeExceededOne')"
+                : "$services.localization.render('feedbackform.maxFileSizeExceededSeveral')"
+            )
+            .replace("{0}", humanSize(size))
+            .replace("{1}", humanSize(allowedFileUploadMaxSize));
+
+            new XWiki.widgets.Notification(msg, "error");
+            return;
+          }
+        }
+
+        let okToSubmit = true;
+
+        // Unfortunately, browsers (at least Chromium and Firefox) don't seem to
+        // actually validate the types of the files. Chromium actually correctly
+        // set the filter in the file dialog on KDE. Firefox does not.
+        // So let's do it ourselves. Worst case it is already done by the
+        // browser and this code is a no-op (if it has no bugs, of course).
+
+        $('#feedback-form input[type="file"][accept]').each(function () {
+          if (!okToSubmit) return;
+
+          const acceptedTypes = this.accept.split(",");
+
+          for (const file of this.files) {
+            let accepted = false;
+            for (let acceptedType of acceptedTypes) {
+              acceptedType = acceptedType.trim();
+              if (acceptedType.startsWith(".")) {
+                if (file.name.endsWith(acceptedType)) {
+                  accepted = true;
+                }
+              } else if (acceptedType.includes("/")) {
+                if (acceptedType.includes("*")) {
+                  const acceptedTypeRE = new RegExp("^" + (
+                    acceptedType
+                      .replaceAll("*", ".*")
+                      .replaceAll("+", "\\+")
+                  ) + "$");
+
+                  if (acceptedTypeRE.test(file.type)) {
+                    accepted = true;
+                  }
+                } else if (file.type === acceptedType) {
+                  accepted = true;
+                }
+              } else {
+                console.error(
+                  "Unrecognized accepted file type '" + acceptedType + "'. " +
+                  "Recognized types: MIME types like 'image/png', " +
+                  "patterns like 'image/*', or file extensions like '.png'"
+                );
+              }
+            }
+
+            if (!accepted) {
+              new XWiki.widgets.Notification(
+                "$services.localization.render('feedbackform.incorrectFileType')"
+                  .replaceAll(
+                    '{0}',
+                    this.accept
+                      .replace(/,[\s]*/, ", ")
+                      .replaceAll("image/*", "images"),
+                  ),
+                "error"
+              );
+              okToSubmit = false;
+            }
+          }
+        });
+
+        // Unfortunately, CKEditor's required event does not seem to work here
+        // https://ckeditor.com/docs/ckeditor4/latest/api/CKEDITOR_editor.html#event-required
+        // The corresponding textareas lose their required attributes when replacing them
+        // with CKEditor. Which is unexpected.
+        // The following code block works around this issue.
+        feedbackModal.find('[data-feedback-required-field] textarea').each(function () {
+          if (okToSubmit &amp;&amp; !(new DOMParser().parseFromString(this.value, "text/html").documentElement.textContent.trim())) {
+            new XWiki.widgets.Notification(
+              "$services.localization.render('feedbackform.wysiwygFieldRequired')",
+              "error"
+            );
+
+            okToSubmit = false;
+          }
+        });
+
+        if (!okToSubmit) {
+          return;
+        }
+      }
+
+      submitFeedbackForm(this, feedbackModal);
+    });
+
+    return feedbackModal.modal();
+  }
+
+  function displayFileMax(maxNumber, maxSize) {
+    let label = "";
+    if (maxNumber &gt; 1 || maxSize &gt; -1) {
+      label = " ($services.localization.render('feedbackform.labelMax') ";
+    }
+
+    if (maxNumber &gt; 1) {
+      label += "$services.localization.render('feedbackform.labelFiles', ['{0}'])".replace("{0}", maxNumber);
+      if (maxSize &gt; -1) {
+        label += ", ";
+      }
+    }
+
+    if (maxSize &gt; -1) {
+      label += humanSize(maxSize);
+    }
+
+    if (label) {
+      return label + ")";
+    }
+
+    return "";
+  }
+
+  function showFeedbackButton() {
+    $('body').append(`
+      &lt;a href="#" id="feedback-button" class="feedback-button"&gt;
+        $services.localization.render('feedbackform.buttonLabel')
+      &lt;/a&gt;
+      &lt;div id="fade-bg" class="feedback-form-fade-bg" style="display:none"&gt;&lt;/div&gt;
+      &lt;div id="feedback-form-loading" class="feedback-form-loading" tabindex="0" style="display:none"&gt;&lt;/div&gt;
+    `);
   };
 
-  var showLoader = function(){
+  function feedbackUrl(action, plain, params) {
+    return new XWiki.Document('FeedbackForm', 'FeedbackFormCode').getURL('get',
+      'action=' + action +
+      (plain ? '&amp;xpage=plain&amp;outputSyntax=plain' : '') +
+      (params ? '&amp;' + $.param(params) : "") +
+      '&amp;language=${xcontext.language}'
+    );
+  }
+
+  function showLoader() {
     $('#fade-bg').show();
     $('#feedback-form-loading').show();
   };
 
-  var hideLoader = function(){
+  function hideLoader() {
     $('#fade-bg').hide();
     $('#feedback-form-loading').hide();
   };
 
-  var showFeedbackForm = function(){
-    showLoader();
-    var documentReference = XWiki.Model.serialize(XWiki.currentDocument.documentReference);
-    var url = new XWiki.Document('FeedbackForm', 'FeedbackFormCode').getURL('get', 'action=loadFeedbackForm&amp;reference=' + encodeURIComponent(documentReference));
-    url = url + "&amp;language=${xcontext.language}";
-    $.get(url, function(data) {
-      var feedbackformModalId = '#feedbackformModal';
-      $(feedbackformModalId).remove();
-      $("body").append(data);
-      var feedbackFormModal = $(feedbackformModalId);
-      var feedbackForm = $('#feedbackForm');
-      feedbackFormModal.modal();
-      $(feedbackForm).submit(function(event){
-        var valid = validateFileField();
-        if(valid){
-          submitFeedbackForm(feedbackForm, feedbackFormModal);
-        }
-        event.preventDefault();
+  function enableCKEditor(textareas) {
+    if (!ckeditor) {
+      require(['deferred!ckeditor'], function (ckeditorPromise) {
+        ckeditorPromise.done((ck) =&gt; {
+          ckeditor = ck;
+          enableCKEditor(textareas);
+        })
       });
-    })
-    .always(function() {
-      hideLoader();
+
+      return;
+    }
+
+    textareas.each(function () {
+      const instance = ckeditor.replace(this);
+      ckInstances.push(instance);
     });
+  }
+
+  function isFalse(val) {
+    return val === false || val === 0 || val === "false" || val === "0";
+  }
+
+  function cleanCKEditor() {
+    while (ckInstances.length) {
+      const instance = ckInstances.pop();
+      instance.resetDirty(); // prevents bogus "are you sure to leave?" message
+      ckeditor.remove(instance);
+    }
+  }
+
+  function showFeedbackForm(config = {}) {
+    showLoader();
+    $.get(feedbackUrl('load', false, {type: config.type}), function(data) {
+      data = $(data);
+
+      const feedbackModal = getFeedbackModal(config.modalTitle);
+      const content = $('#feedback-modal-content');
+      content.empty().append(data);
+
+      content.find("[data-feedback-required-field]").find("input,textarea").each(function () {
+        this.required = true;
+      });
+
+      const ckTAs = content.find('.ckeditor-textarea');
+      if (ckTAs.length) {
+        enableCKEditor(ckTAs);
+      }
+
+      const typeChoice = document.getElementById("feedbackTypeChoice");
+      const type = config.type || typeChoice.value;
+
+      if (isFalse(config.allowFeedbackTypeChoice) || !typeChoice.querySelector("option+option")) {
+        $("#feedback-modal-type-choice").hide()
+      } else {
+        $("#feedback-modal-type-choice").show()
+      }
+
+      dataset = data[0].dataset;
+
+      if (isFalse(dataset.suggestSendingBrowserEnv)) {
+        $("#feedback-modal-browser-env").hide().prop('checked', false);
+      } else {
+        $("#feedback-modal-browser-env").show();
+      }
+
+      const allowedFileUploadMaxNumber = parseInt(dataset.allowedFileUploadMaxNumber) || 0;
+      const allowedFileUploadMaxSize = parseInt(dataset.allowedFileUploadMaxSize) || 0;
+      if (dataset.allowedFileUploadTypes &amp;&amp; allowedFileUploadMaxNumber &amp;&amp; allowedFileUploadMaxSize) {
+        const imagesAccepted = (
+          dataset.allowedFileUploadTypes === "*" ||
+          dataset.allowedFileUploadTypes.includes("image/*")
+        );
+
+        const fileGroup = document.getElementById('feedback-file-group');
+
+        const fileLabel = document.createElement("label");
+        fileLabel.textContent = (
+          imagesAccepted
+            ? (
+              allowedFileUploadMaxNumber === 1
+                ? "$services.localization.render('feedbackform.labelAttachFileOrImage')"
+                : "$services.localization.render('feedbackform.labelAttachFilesOrImages')"
+            )
+            : (
+              allowedFileUploadMaxNumber === 1
+                ? "$services.localization.render('feedbackform.labelAttachFile')"
+                : "$services.localization.render('feedbackform.labelAttachFiles')"
+            )
+        ) + displayFileMax(allowedFileUploadMaxNumber, allowedFileUploadMaxSize);
+
+        const fileInput = document.createElement('input');
+        fileInput.type = "file";
+
+        if (dataset.allowedFileUploadTypes !== '*') {
+          fileInput.accept = dataset.allowedFileUploadTypes;
+        }
+
+        if (!isFalse(dataset.fileUploadRequired)) {
+          fileInput.required = true;
+        }
+
+        if (allowedFileUploadMaxSize &gt; 1) {
+          fileInput.multiple = true;
+        }
+
+        fileLabel.for = fileInput.id = "feedback-modal-file";
+        fileGroup.appendChild(fileLabel);
+        fileGroup.appendChild(fileInput);
+      }
+
+      feedbackModal.one('hidden.bs.modal', cleanCKEditor);
+
+      document.getElementById("feedback-modal-type").value = type;
+    })
+    .always(hideLoader);
   };
 
-  var validateFileField = function(){
-    var resp = true;
-    var fileElement = $('#feedbackFile');
-    if(fileElement.get(0).files.length &gt; 0) {
-      var maxFileSize = 5 * 1024 * 1024; // 5MB
-      var fileName = fileElement.get(0).files[0].name;
-      var fileExt = fileName.substr((fileName.lastIndexOf('.') + 1));
-      var allowedExtensions = ['jpg', 'jpeg', 'png', 'pdf'];
-      if ((fileElement.get(0).files[0].size &gt; maxFileSize) || ($.inArray(fileExt, allowedExtensions) == -1)) {
-        fileElement.get(0).setCustomValidity("$services.localization.render('feedbackform.invalidFile')");
-        fileElement.get(0).reportValidity();
-        resp = false;
-      } else {
-        fileElement.get(0).setCustomValidity("");
-      }
-    }
-    return resp;
-  }
-  var showMessage = function(feedbackFormModal, messageType, message){
-    $('.modal-body', feedbackFormModal).html($('&lt;div/&gt;').addClass('box ' + messageType + 'message').html(message));
+  function showMessage(feedbackFormModal, messageType, message) {
+    $('.modal-body', feedbackFormModal).replaceWith(
+      $('&lt;div class="box ' + messageType + 'message"&gt;').text(message)
+    );
+    cleanCKEditor();
   }
 
-  var submitFeedbackForm = function(feedbackForm, feedbackFormModal){
-    var formData = new FormData(feedbackForm[0]);
-    formData.append('pageURL', window.location.href);
-    if($('#provideBrowserData', feedbackForm).is(':checked')){
-      formData.append('referrer', document.referrer);
-      formData.append('userAgent', window.navigator.userAgent);
-      formData.append('screenResolution', window.screen.width + "x" + window.screen.height);
+  function submitFeedbackForm(feedbackForm, feedbackFormModal) {
+    const formData = new FormData(feedbackForm);
+
+    if (!isFalse(document.getElementById("feedback-modal-body-root").dataset.sendUrl)) {
+      formData.append(GENERAL_FEEDBACK_CLASS_NAME + '_0_url', location.href);
+      formData.append(GENERAL_FEEDBACK_CLASS_NAME + '_0_page', XWiki.currentDocument.documentReference.toString());
     }
-    var documentReference = XWiki.Model.serialize(XWiki.currentDocument.documentReference);
-    var url = new XWiki.Document('FeedbackForm', 'FeedbackFormCode').getURL('get', 'action=sendFeedback&amp;xpage=plain&amp;outputSyntax=plain&amp;reference=' + encodeURIComponent(documentReference));
-    url = url + "&amp;language=${xcontext.language}";
+
+    if (document.getElementById('provideBrowserData').checked) {
+      formData.append(GENERAL_FEEDBACK_CLASS_NAME + '_0_referrer', document.referrer);
+      formData.append(GENERAL_FEEDBACK_CLASS_NAME + '_0_userAgent', navigator.userAgent);
+      formData.append(GENERAL_FEEDBACK_CLASS_NAME + '_0_screenResolution', screen.width + 'x' + screen.height);
+    }
+
     showLoader();
-    $.ajax({
-      url: url,
-      type: 'post',
+
+    $.post({
+      url: feedbackUrl('submit', true),
       data: formData,
       contentType: false,
       processData: false,
-      dataType:'json'
     })
     .done(function(data) {
-      if(data){
-        var messageType = data.status ? 'success' : 'error';
-        showMessage(feedbackFormModal, messageType, data.message);
-      }
-      else
-      {
-        showMessage(feedbackFormModal, 'error', "Unknown error !");
+      if (data.status) {
+        showMessage(feedbackFormModal, 'info', data.message)
+        $('#submitFeedbackButton').remove();
+      } else {
+        new XWiki.widgets.Notification(data.message, "error");
       }
     })
     .fail(function(jqXHR, textStatus, errorThrown) {
-      showMessage(feedbackFormModal, 'error', "An error occurred while sending the feedback. Error : " + errorThrown);
+      new XWiki.widgets.Notification(
+        "$services.localization.render('feedbackform.submitError') " + errorThrown,
+        "error"
+      );
+      console.error(errorThrown);
     })
-    .always(function() {
-      $("#submitFeedbackButton").remove();
-      hideLoader();
-    });
+    .always(hideLoader);
   }
-  /////
-  $(document).ready(function(){
-    var feedbackFormEnabled = "$xwiki.getDocument('FeedbackFormCode.Configuration').getObject('FeedbackFormCode.ConfigurationClass').getProperty('enabled').value";
-    if(feedbackFormEnabled == '1'){
-      showFeedbackButton();
-    }
-    $('.showFeedbackForm, #feedback-button').click(function(event){
+
+  $(document).ready(function() {
+    /* #if("$config.getProperty('generalButtonEnabled').value" == '1') */
+    showFeedbackButton();
+    /* #end */
+
+    $('.showFeedbackForm, #feedback-button').click(function(event) {
       event.preventDefault();
-      showFeedbackForm();
+      showFeedbackForm(event.currentTarget.dataset);
     });
   });
-});</code>
+});
+// #end
+</code>
     </property>
     <property>
       <name/>
@@ -637,28 +947,33 @@ body.modal-open {
   overflow-y: hidden !important;
 }
 
-.feedbackform-modal label.d-block {
+#feedback-modal label.d-block {
   display: block;
 }
 
-.feedbackform-modal input[type="text"], .feedbackform-modal input[type="email"] {
+#feedback-modal input[type="text"], #feedback-modal input[type="email"] {
   width: 100%;
 }
 
-.feedbackform-modal label span.mandatory-field {
+#feedback-modal label span.mandatory-field {
   color: red;
 }
 
-.feedbackform-modal .box {
+#feedback-modal .box {
   line-height: 30px;
 }
 
-.feedbackform-modal .checkbox-inline {
+#feedback-modal .checkbox-inline {
   font-weight: 700;
 }
 
-.feedbackform-modal .checkbox-inline input[type='checkbox'] {
+#feedback-modal .checkbox-inline input[type='checkbox'] {
   bottom: 2px;
+}
+
+#feedback-modal textarea {
+  display: block;
+  width: 100%;
 }</code>
     </property>
     <property>

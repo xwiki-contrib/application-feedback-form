@@ -20,7 +20,7 @@
  * 02110-1301 USA, or see the FSF site: http://www.fsf.org.
 -->
 
-<xwikidoc version="1.4" reference="FeedbackFormCode.Translations" locale="">
+<xwikidoc version="1.5" reference="FeedbackFormCode.Translations" locale="">
   <web>FeedbackFormCode</web>
   <name>Translations</name>
   <language/>
@@ -29,6 +29,7 @@
   <creator>xwiki:XWiki.Admin</creator>
   <parent>WebHome</parent>
   <author>xwiki:XWiki.Admin</author>
+  <originalMetadataAuthor>xwiki:XWiki.Admin</originalMetadataAuthor>
   <contentAuthor>xwiki:XWiki.Admin</contentAuthor>
   <version>1.1</version>
   <title/>
@@ -39,36 +40,56 @@
   <content>## Feedback form
 feedbackform.buttonLabel=Feedback
 feedbackform.title=Feedback
-feedbackform.intoText=Thank you for your feedback!&lt;br/&gt;We will review your message as soon as possible. Normally we do not contact you back on this subject. However, we will take the liberty of reaching out to you if we have any questions.
+feedbackform.introText=Thank you for your feedback!&lt;br/&gt;We will review your message as soon as possible. Normally we do not contact you back on this subject. However, we will take the liberty of reaching out to you if we have any questions.
 feedbackform.type=Feedback Type
-feedbackform.type.website=Website
 feedbackform.type.currentPage=Current page
 feedbackform.type.other=Other
-feedbackform.user.title=Title
-feedbackform.user.mrs=Mrs.
-feedbackform.user.mr=Mr.
-feedbackform.user.firstName=First name
-feedbackform.user.lastName=Last name
+feedbackform.types.website=Website
+feedbackform.types.website.field.title=Title
+feedbackform.types.website.field.title.ms=Ms.
+feedbackform.types.website.field.title.mr=Mr.
+feedbackform.types.website.field.firstName=First name
+feedbackform.types.website.field.lastName=Last name
 feedbackform.user.reporter=Reporter
-feedbackform.user.email=E-mail
-feedbackform.subject=Subject
-feedbackform.message=Message
+feedbackform.types.website.field.email=E-mail
+feedbackform.types.website.field.subject=Subject
+feedbackform.types.website.field.message=Message
+feedbackform.types.website.confirmationMessage=Thank you for your feedback! It is highly appreciated and it helps us improve our website!
+feedbackform.types.website.email.page=Page:
+feedbackform.types.website.email.user=Thank you for taking the time to give us your feedback on our website!&lt;br/&gt;We will review it as soon as possible.&lt;br/&gt;See the details of your feedback below: &lt;br/&gt;&lt;br/&gt;
+feedbackform.types.website.email.subject.user=Your feedback
+feedbackform.types.website.email.wiki=A new feedback has been sent !&lt;br/&gt;See the details of the feedback below: &lt;br/&gt;&lt;br/&gt;
+feedbackform.types.website.email.subject.wiki=New user feedback
+feedbackform.confirmationMessage=Thank you for your feedback!
 feedbackform.attachment=Image or File (max. 5MB,JPG, PNG, PDF)
 feedbackform.consentMessage=Provide data from your environment, eg. browser and page URL. This helps us understand your feedback.
 feedbackform.sendFeedback=Send feedback
 feedbackform.invalidFile=Only jpeg, png, and pdf formats are allowed and file size must not exceed 5 MB!
-feedbackform.invalidFormData=An error occurred while sending the feedback. The following fields are required : Feedback type, Title, First name, Last name, E-mail, Subject, Message. Note that, when a file is attached, it must be in one of these formats : 'JPG, PNG, PDF' and  not exceed a size of 5MB.
-feedbackform.confirmationMessage=Thank you for your feedback! It is highly appreciated and it helps us improve our website!
+feedbackform.invalidFormData=An error occurred while sending the feedback. The following fields are required: Feedback type, Title, First name, Last name, E-mail, Subject, Message. Note that, when a file is attached, it must be in one of these formats: 'JPG, PNG, PDF' and  not exceed a size of 5MB.
 feedbackform.sendingFeedbackError=An error occurred while sending the feedback.
-feedbackform.email.user=Thank you for taking the time to give us your feedback on our website!&lt;br/&gt;We will review it as soon as possible.&lt;br/&gt;See the details of your feedback below : &lt;br/&gt;&lt;br/&gt;
-feedbackform.email.subject.user=Your feedback
-feedbackform.email.wiki=A New feedback has been sent !&lt;br/&gt;See the details of the feedback below : &lt;br/&gt;&lt;br/&gt;
-feedbackform.email.subject.wiki=New user feedback
-feedbackform.environment=Environment
-feedbackform.environment.pageURL=Location
-feedbackform.environment.referrer=Referrer
-feedbackform.environment.userAgent=User Agent
-feedbackform.environment.screenResolution=Screen Resolution</content>
+feedbackform.sendingEmailFeedbackError=An error occurred while sending feedback form email, Error: {}
+feedbackform.submitError=An error occurred while sending the feedback:
+feedbackform.types.website.environment=Environment
+feedbackform.types.website.environment.pageURL=Location
+feedbackform.types.website.environment.referrer=Referrer
+feedbackform.types.website.environment.userAgent=User Agent
+feedbackform.types.website.environment.screenResolution=Screen Resolution
+feedbackform.labelAttachFilesOrImages=Attach files or images
+feedbackform.labelAttachFileOrImage=Attach a file or an image
+feedbackform.labelAttachFile=Attach files
+feedbackform.labelAttachFiles=Attach a file
+feedbackform.tooManyFiles=You are trying to send {0} files. The maximum is {1}. Please remove some.
+feedbackform.maxFileSizeExceededSeveral=You are trying to send {0}, which is higher than the allowed maximum of {1}. Please send fewer or smaller files.
+feedbackform.maxFileSizeExceededOne=You are trying to send {0}, which is higher than the allowed maximum of {1}. Please send a smaller file.
+feedbackform.fileSizeUnit.B=B
+feedbackform.fileSizeUnit.KB=KB
+feedbackform.fileSizeUnit.MB=MB
+feedbackform.fileSizeUnit.GB=GB
+feedbackform.labelMax=max.
+feedbackform.labelFiles={0} files
+feedbackform.wysiwygFieldRequired=Please fill in all the required fields
+feedbackform.incorrectFileType=Incorrect file type. Accepted types or extensions: {0}
+</content>
   <object>
     <name>FeedbackFormCode.Translations</name>
     <number>0</number>

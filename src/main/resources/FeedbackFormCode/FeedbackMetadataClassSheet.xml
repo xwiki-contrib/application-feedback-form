@@ -1,0 +1,108 @@
+<?xml version="1.1" encoding="UTF-8"?>
+
+<!--
+ * See the NOTICE file distributed with this work for additional
+ * information regarding copyright ownership.
+ *
+ * This is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as
+ * published by the Free Software Foundation; either version 2.1 of
+ * the License, or (at your option) any later version.
+ *
+ * This software is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with this software; if not, write to the Free
+ * Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
+ * 02110-1301 USA, or see the FSF site: http://www.fsf.org.
+-->
+
+<xwikidoc version="1.5" reference="FeedbackFormCode.FeedbackMetadataClassSheet" locale="">
+  <web>FeedbackFormCode</web>
+  <name>FeedbackMetadataClassSheet</name>
+  <language/>
+  <defaultLanguage/>
+  <translation>0</translation>
+  <creator>xwiki:XWiki.Admin</creator>
+  <parent>Main.WebHome</parent>
+  <author>xwiki:XWiki.Admin</author>
+  <originalMetadataAuthor>xwiki:XWiki.Admin</originalMetadataAuthor>
+  <contentAuthor>xwiki:XWiki.Admin</contentAuthor>
+  <version>1.1</version>
+  <title>FeedbackMetadataClassSheet</title>
+  <comment/>
+  <minorEdit>false</minorEdit>
+  <syntaxId>xwiki/2.1</syntaxId>
+  <hidden>true</hidden>
+  <content>{{velocity}}##
+#if($xcontext.getDisplayMode() == "view" || $xcontext.action == "view")
+#set($feedbackMetadataObj = $doc.getObject('FeedbackFormCode.FeedbackMetadataClass'))##
+{{html clean="false" wiki="false"}}##
+Feedback Metadata:
+&lt;table&gt;
+&lt;tr&gt;
+  &lt;th&gt;Reporter: &lt;/th&gt;
+  &lt;td&gt;
+    {{/html}}##
+    $doc.display('reporter', $feedbackMetadataObj)##
+    {{html clean="false" wiki="false"}}
+  &lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+  &lt;th&gt;Page URL: &lt;/th&gt;
+  &lt;td&gt;
+  {{/html}}##
+  $doc.display('url', $feedbackMetadataObj)##
+  {{html clean="false" wiki="false"}}
+  &lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+  &lt;th&gt;Recipients: &lt;/th&gt;
+  &lt;td&gt;
+  {{/html}}##
+  $doc.display('recipients', $feedbackMetadataObj)##
+  {{html clean="false" wiki="false"}}
+  &lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+  &lt;th&gt;Referrer: &lt;/th&gt;
+  &lt;td&gt;
+  {{/html}}##
+  $doc.display('referrer', $feedbackMetadataObj)##
+  {{html clean="false" wiki="false"}}
+  &lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+  &lt;th&gt;User Agent: &lt;/th&gt;
+  &lt;td&gt;
+  {{/html}}##
+  $doc.display('userAgent', $feedbackMetadataObj)##
+  {{html clean="false" wiki="false"}}
+  &lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+  &lt;th&gt;Screen resolution: &lt;/th&gt;
+  &lt;td&gt;
+  {{/html}}##
+  $doc.display('screenResolution', $feedbackMetadataObj)##
+  {{html clean="false" wiki="false"}}
+  &lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+  &lt;th&gt; Feedback type:&lt;/th&gt;
+  &lt;td&gt;
+  {{/html}}##
+  #set($type = $feedbackMetadataObj.get('type'))
+  [[$services.localization.render("feedbackform.types.${xwiki.getDocument($type).getValue('type')}")&gt;&gt;$type]]##
+  {{html clean="false" wiki="false"}}
+  &lt;/td&gt;
+&lt;/tr&gt;
+&lt;/table&gt;
+{{/html}}
+#end
+{{/velocity}}
+</content>
+</xwikidoc>
