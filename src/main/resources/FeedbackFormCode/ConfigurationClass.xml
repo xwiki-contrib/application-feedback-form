@@ -161,6 +161,36 @@
       <valueField/>
       <classType>com.xpn.xwiki.objects.classes.PageClass</classType>
     </publicFeedbackTypes>
+    <saveToWiki>
+      <customDisplay/>
+      <defaultValue>1</defaultValue>
+      <disabled>0</disabled>
+      <displayFormType>select</displayFormType>
+      <displayType/>
+      <hint>Should feeback be saved in the wiki?</hint>
+      <name>saveToWiki</name>
+      <number>8</number>
+      <prettyName>saveToWiki</prettyName>
+      <unmodifiable>0</unmodifiable>
+      <validationMessage/>
+      <validationRegExp/>
+      <classType>com.xpn.xwiki.objects.classes.BooleanClass</classType>
+    </saveToWiki>
+    <sendByEmail>
+      <customDisplay/>
+      <defaultValue>1</defaultValue>
+      <disabled>0</disabled>
+      <displayFormType>select</displayFormType>
+      <displayType/>
+      <hint>Should feedback be sent by email?</hint>
+      <name>sendByEmail</name>
+      <number>7</number>
+      <prettyName>sendByEmail</prettyName>
+      <unmodifiable>0</unmodifiable>
+      <validationMessage/>
+      <validationRegExp/>
+      <classType>com.xpn.xwiki.objects.classes.BooleanClass</classType>
+    </sendByEmail>
   </class>
   <object>
     <name>FeedbackFormCode.ConfigurationClass</name>

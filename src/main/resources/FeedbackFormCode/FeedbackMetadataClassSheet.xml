@@ -96,7 +96,7 @@ Feedback Metadata:
   &lt;td&gt;
   {{/html}}##
   #set($type = $feedbackMetadataObj.get('type'))
-  [[$xwiki.getDocument($type).getValue("type")&gt;&gt;$type]]##
+  [[$services.localization.render("feedbackform.types.${xwiki.getDocument($type).getValue('type')}")&gt;&gt;$type]]##
   {{html clean="false" wiki="false"}}
   &lt;/td&gt;
 &lt;/tr&gt;

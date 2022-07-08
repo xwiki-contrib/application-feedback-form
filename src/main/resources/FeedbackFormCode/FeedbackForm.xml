@@ -1,7 +1,6 @@
 <?xml version="1.1" encoding="UTF-8"?>
 
-<xwikidoc version="1.5" reference="FeedbackFormCode.FeedbackForm" locale="">
-  <!--
+<!--
  * See the NOTICE file distributed with this work for additional
  * information regarding copyright ownership.
  *
@@ -21,6 +20,7 @@
  * 02110-1301 USA, or see the FSF site: http://www.fsf.org.
 -->
 
+<xwikidoc version="1.5" reference="FeedbackFormCode.FeedbackForm" locale="">
   <web>FeedbackFormCode</web>
   <name>FeedbackForm</name>
   <language/>
@@ -67,7 +67,7 @@
 #macro(checkEmailSendingStatus $mailResultObj $emailStatus)
   #set ($macro.emailStatus = true)
   ## Check if the message was created properly and if we have permissions to send emails
-  #set ($macro.emailErrorMessage = "An error occurred while sending feedback form email, Error : {}")
+  #set ($macro.emailErrorMessage = $services.localization.render('feedbackform.sendingEmailFeedbackError'))
   #if ($services.mail.sender.lastError)
     #set ($macro.emailStatus = false)
     #set ($discard = $logger.error($macro.emailErrorMessage, $exceptiontool.getStackTrace($services.mail.sender.lastError)))
@@ -103,9 +103,12 @@
   #setVariable("$recipientEmail" $macro.email)
 #end
 
-#macro(sendMail $velocityVariables)
-  #set ($macro.templateReference = $services.model.createDocumentReference('', 'FeedbackFormCode', 'FeedbackFormMailTemplate'))
+## Send a mail to wiki and to the user who added the feedback with a summary of the feedback
+#macro(sendMail $velocityVariables $confirmationMessage $emailSent)
+  #set ($macro.templateReference = $xwiki.getDocument($velocityVariables.emailTemplate).documentReference)
   #set ($macro.mailParameters = {'language' : 'en', 'velocityVariables' : $velocityVariables})
+  #set ($discard = $macro.mailParameters.velocityVariables.put('contextLocale', $xcontext.locale))
+  #set ($discard = $macro.mailParameters.velocityVariables.put('mailRecipient', 'wiki'))
   ## Add the attachment to the mail
   #if ("$!xwiki.fileupload.getFileItems()" != '' &amp;&amp; $xwiki.fileupload.getFileItems().size() &gt; 0)
     #foreach($item in $xwiki.fileupload.getFileItems())
@@ -119,24 +122,30 @@
   #end
   ##
   #getSenderEmail($senderEmail)
-  #getFeedbackRecipientEmail($feedbackRecipientEmail)
   #set ($macro.message = $services.mail.sender.createMessage('template', $macro.templateReference, $macro.mailParameters))
   #set ($discard = $macro.message.setFrom($senderEmail))
-  #set ($discard = $macro.message.addRecipient('to', $feedbackRecipientEmail))
+  #foreach ($recipient in $velocityVariables.emailsRecipients)
+    #set ($discard = $macro.message.addRecipient('to', $recipient))
+  #end
   #set ($mailResult = $services.mail.sender.send($macro.message))
+  #set ($emailSent = $NULL)
   #checkEmailSendingStatus($mailResult $emailSent)
   #if ($emailSent)
-    $jsontool.serialize({"status" : true, "message" : $services.localization.render('feedbackform.confirmationMessage')})
-    ## Send email to user who added the feedback
-    #set ($discard = $macro.mailParameters.velocityVariables.put('mailRecipient', 'user'))
-    #set ($discard = $macro.mailParameters.velocityVariables.put('environment', false))
-    #set ($macro.message = $services.mail.sender.createMessage('template', $macro.templateReference, $macro.mailParameters))
-    #set ($discard = $maloadFeedbackFormcro.message.setFrom($senderEmail))
-    #set ($discard = $macro.message.addRecipient('to', $request.feedbackUserEmail))
-    #set ($mailResult = $services.mail.sender.send($macro.message))
-    #checkEmailSendingStatus($mailResult $emailSent)
+    #set($feedbackUserEmail = $velocityVariables.feedbackDoc.getValue("reporterEmail"))
+    #if ("$!feedbackUserEmail" == "" &amp;&amp; !$isGuest)
+      #set($feedbackUserEmail = $xwiki.getDocument($xcontext.getUserReference()).getValue('email'))
+    #end
+    {"status": true, "message": $jsontool.serialize($confirmationMessage)}
+    ## Send email to the user who added the feedback
+    #if ("$!feedbackUserEmail" != "")
+      #set ($discard = $macro.mailParameters.velocityVariables.put('mailRecipient', 'user'))
+      #set ($macro.message = $services.mail.sender.createMessage('template', $macro.templateReference, $macro.mailParameters))
+      #set ($discard = $macro.message.setFrom($senderEmail))
+      #set ($discard = $macro.message.addRecipient('to', $feedbackUserEmail))
+      #set ($mailResult = $services.mail.sender.send($macro.message))
+    #end
   #else
-    $jsontool.serialize({"status" : false, "message" : $services.localization.render('feedbackform.sendingFeedbackError')})
+    {"status": false, "message": $jsontool.serialize($services.localization.render('feedbackform.sendingFeedbackError'))}
   #end
 #end
 
@@ -144,16 +153,11 @@
   $response.setContentType('application/json')
   #set ($type = $request.type)
   #set ($feedbackTypeObj = $xwiki.getDocument($type).getObject("FeedbackFormCode.FeedbackTypeClass"))
-  #if(!$!feedbackTypeObj)
+  #if (!$!feedbackTypeObj)
     {"status": false, "message": "Error: Wrong feedback type."}
     #break
   #end
   #set ($shortType = $feedbackTypeObj.getValue("type"))
-  ## #validateFeedbackFormData($doSend)
-  ## #if (!$doSend)
-  ##   $jsontool.serialize({"status" : false, "message" : $services.localization.render('feedbackform.invalidFormData')})
-  ##   #break
-  ## #end
   #set ($config = $xwiki.getDocument("FeedbackFormCode.Configuration").getObject("FeedbackFormCode.ConfigurationClass"))
   #set ($space = "${config.getValue('feedbackSpace')}.$shortType")
   #set ($date = $xwiki.jodatime.getDateTime().toString('YYY-MM-dd_HH\:mm\:ss'))
@@ -161,69 +165,79 @@
   #set ($escapedUser = $stringtool.replace($user, ".", "\."))
   #set ($feedbackDoc = $xwiki.getDocument("$space", "${space}.${date}-${escapedUser}"))
   #set ($discard = $feedbackDoc.addObjectFromRequest("FeedbackFormCode.FeedbackMetadataClass"))
+  #getFeedbackRecipientEmail($feedbackRecipientEmail)
   #set ($feedbackMetadata = $feedbackDoc.getObject("FeedbackFormCode.FeedbackMetadataClass"))
   $feedbackMetadata.set("reporter", $user)
   $feedbackMetadata.set("type", $type)
+  $feedbackMetadata.set("emailsRecipients", [$feedbackRecipientEmail])
+  $feedbackMetadata.set("usersRecipients", [])
   #set ($discard = $feedbackDoc.addObjectFromRequest($type))
   #set ($validateAndCustomizeSubmission = $feedbackTypeObj.getValue("validateAndCustomizeSubmission"))
   #if ("$!validateAndCustomizeSubmission" != "")
     #evaluate($validateAndCustomizeSubmission)
   #end
-  #if("$!cancelSubmission" != "")
+  #if ("$!cancelSubmission" != "")
     {"status": false, "message": $jsontool.serialize("$!cancelSubmission")}
     #break
   #end
-  #set ($discard = $feedbackDoc.save())
-  #if (!$!services.localization.get("feedbackform.${shortType}.confirmationMessage"))
-    {"status": true, "message": $jsontool.serialize($services.localization.render('feedbackform.confirmationMessage'))}
-  #else
-     {"status": true, "message": $jsontool.serialize($services.localization.render("feedbackform.${shortType}.confirmationMessage"))
+  #if ("$config.getValue('saveToWiki')" == "1")
+    ## this needs to be done after submission customization and before
+    ## sending mails so mail templates can retrieve the feedback document URL.
+    #set ($discard = $feedbackDoc.save())
   #end
-##   ## Send a mail to wiki and to the user who added the feedback with a summary of the feedback
-##   #set ($velocityVariables = {
-##     'feedbackType' : $request.feedbackType,
-##     'feedbackUserTitle' : $request.feedbackUserTitle,
-##     'feedbackUserFirstName' : $request.feedbackUserFirstName,
-##     'feedbackUserLastName' : $request.feedbackUserLastName,
-##     'feedbackUserEmail' : $request.feedbackUserEmail,
-##     'feedbackSubject' : $request.feedbackSubject,
-##     'feedbackMessage' : $request.feedbackMessage,
-##     'contextLocale' : $xcontext.locale,
-##     'pageURL' : $request.pageURL,
-##     'referrer' : $request.referrer,
-##     'userAgent' : $request.userAgent,
-##     'screenResolution' : $request.screenResolution,
-##     'mailRecipient' : 'wiki'
-##   })
-##   #if ("$!request.referrer" != '' ||
-##     "$!request.userAgent" != '' ||
-##     "$!request.screenResolution" != '')
-##      #set ($discard = $macro.velocityVariables.put('environment', true))
-##   #end
-##   #sendMail($velocityVariables)
+  #set ($emailsRecipients = [])
+  #foreach($emailRecipient in $stringtool.split($!feedbackMetadata.getValue("emailsRecipients"), ","))
+    #set($discard = $emailsRecipients.add($emailRecipient))
+  #end
+  #foreach ($userRecipient in $stringtool.split($!feedbackMetadata.getValue("usersRecipients"), ","))
+    #set ($userRecipientEmail = $xwiki.getDocument($userRecipient.trim()).getValue('email'))
+    #if ("$!userRecipientEmail" != "")
+       #set($discard = $emailsRecipients.add($userRecipientEmail))
+    #end
+  #end
+  #set ($specificConfirmationKey = "feedbackform.types.${shortType}.confirmationMessage")
+  #set ($confirmationMessage = $services.localization.get($specificConfirmationKey))
+  #if ("$!confirmationMessage" == "")
+    #set ($confirmationMessage = $services.localization.render('feedbackform.confirmationMessage'))
+  #else
+    #set ($confirmationMessage = $services.localization.render($specificConfirmationKey))
+  #end
+  #set ($mailTemplate = $feedbackTypeObj.getValue('mailTemplate'))
+  #set ($emailOK = false)
+  $feedbackMetadata.set("emailsRecipients", $emailsRecipients)
+  #if ("$config.getValue('sendByEmail')" == "1" &amp;&amp; "$!mailTemplate" != "" &amp;&amp; "$feedbackMetadata.getValue('usersRecipients')" != "[]")
+    #sendMail({
+      'emailTemplate' : $mailTemplate,
+      'emailsRecipients': $emailsRecipients,
+      'feedbackDoc': $feedbackDoc
+    }, $confirmationMessage, $emailOK)
+  #else
+    #set ($emailOK = true)
+    {"status": true, "message": $jsontool.serialize($confirmationMessage)}
+  #end
 #end
 {{/velocity}}
 
 {{velocity}}
 #set ($action = $request.action)
-#if($action == 'load')
+#if ($action == 'load')
   #set ($type = "$!request.type")
   #if ("$type" == "")
-    #set($type = $xwiki.getDocument("FeedbackFormCode.Configuration").getValue("publicFeedbackTypes")[0])
+    #set ($type = $xwiki.getDocument("FeedbackFormCode.Configuration").getValue("publicFeedbackTypes")[0])
   #end
   #set ($typeDoc = $xwiki.getDocument($type))
   #set ($typeSheet = $typeDoc.getObject('XWiki.ClassSheetBinding').getValue('sheet'))
-  #set ($config = $typeDoc.getObject('FeedbackFormCode.FeedbackTypeClass'))
+  #set ($typeConfig = $typeDoc.getObject('FeedbackFormCode.FeedbackTypeClass'))
   #set ($discard = $xcontext.setDisplayMode('edit'))
   {{html clean=false wiki=true}}##
   &lt;div
     id="feedback-modal-body-root"
-    data-suggest-sending-browser-env="$config.getValue('suggestSendingBrowserEnv')"
-    data-send-url="$config.getValue('sendURL')"
-    data-allowed-file-upload-max-number="$config.getValue('allowedFileUploadMaxNumber')"
-    data-allowed-file-upload-max-size="$config.getValue('allowedFileUploadMaxSize')"
-    data-allowed-file-upload-types="$stringtool.join($config.getValue('allowedFileUploadTypes'), ',')"
-    data-file-upload-required="$config.getValue('fileUploadRequired')"
+    data-suggest-sending-browser-env="$typeConfig.getValue('suggestSendingBrowserEnv')"
+    data-send-url="$typeConfig.getValue('sendURL')"
+    data-allowed-file-upload-max-number="$typeConfig.getValue('allowedFileUploadMaxNumber')"
+    data-allowed-file-upload-max-size="$typeConfig.getValue('allowedFileUploadMaxSize')"
+    data-allowed-file-upload-types="$stringtool.join($typeConfig.getValue('allowedFileUploadTypes'), ',')"
+    data-file-upload-required="$typeConfig.getValue('fileUploadRequired')"
   &gt;{{display reference="$typeSheet" /}}&lt;/div&gt;##
   {{/html}}
 #elseif($action == 'submit')
@@ -376,7 +390,8 @@ require(['jquery'], function($) {
                   &lt;select class="form-control" id="feedbackTypeChoice"&gt;
                     #foreach($type in $config.getValue('publicFeedbackTypes'))
                       &lt;option value="$escapetool.xml($type).replace('$', '&amp;#36;').replace('\', '&amp;#92;')"&gt;
-                        $escapetool.xml($xwiki.getDocument($type).getObject('FeedbackFormCode.FeedbackTypeClass').getValue("type")).replace('$', '&amp;#36;').replace('\', '&amp;#92;')
+                        #set($typeLabel = $xwiki.getDocument($type).getObject('FeedbackFormCode.FeedbackTypeClass').getValue("type"))
+                        $escapetool.xml($services.localization.render("feedbackform.type.$typeLabel")).replace('$', '&amp;#36;').replace('\', '&amp;#92;')
                       &lt;/option&gt;
                     #end
                   &lt;/select&gt;
@@ -732,7 +747,6 @@ require(['jquery'], function($) {
       processData: false,
     })
     .done(function(data) {
-      console.log("data", data);
       if (data.status) {
         showMessage(feedbackFormModal, 'info', data.message)
         $('#submitFeedbackButton').remove();
@@ -741,7 +755,10 @@ require(['jquery'], function($) {
       }
     })
     .fail(function(jqXHR, textStatus, errorThrown) {
-      showMessage(feedbackFormModal, 'error', "$services.localization.render('feedbackform.submitError') " + errorThrown);
+      new XWiki.widgets.Notification(
+        "$services.localization.render('feedbackform.submitError') " + errorThrown,
+        "error"
+      );
       console.error(errorThrown);
     })
     .always(hideLoader);
@@ -953,7 +970,11 @@ body.modal-open {
 #feedback-modal .checkbox-inline input[type='checkbox'] {
   bottom: 2px;
 }
-</code>
+
+#feedback-modal textarea {
+  display: block;
+  width: 100%;
+}</code>
     </property>
     <property>
       <contentType>LESS</contentType>

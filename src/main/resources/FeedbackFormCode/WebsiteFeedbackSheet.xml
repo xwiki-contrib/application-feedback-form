@@ -46,7 +46,7 @@
   #else
     &lt;th&gt;
   #end
-  $services.localization.render("feedbackform.website.field.$field")##
+  $services.localization.render("feedbackform.types.website.field.$field")##
   #if($isEditMode)
     &lt;span class="mandatory-field"&gt;*&lt;/span&gt;&lt;/label&gt;
   #else
@@ -56,7 +56,6 @@
   $doc.display($field, $xObj)##
   {{html clean="false" wiki="false"}}
   #if($isEditMode)
-    &lt;/label&gt;
     &lt;/div&gt;
   #else
     &lt;/td&gt;&lt;/tr&gt;
@@ -112,6 +111,34 @@
       <defaultWeb/>
       <nameField/>
       <validationScript/>
+      <emailsRecipients>
+        <cache>0</cache>
+        <classname/>
+        <customDisplay/>
+        <defaultValue/>
+        <disabled>0</disabled>
+        <displayType>input</displayType>
+        <freeText>allowed</freeText>
+        <hint/>
+        <idField/>
+        <largeStorage>0</largeStorage>
+        <multiSelect>1</multiSelect>
+        <name>emailsRecipients</name>
+        <number>2</number>
+        <picker>1</picker>
+        <prettyName>emailsRecipients</prettyName>
+        <relationalStorage>0</relationalStorage>
+        <separator/>
+        <separators/>
+        <size>1</size>
+        <sort/>
+        <sql/>
+        <unmodifiable>0</unmodifiable>
+        <validationMessage>Invalid email</validationMessage>
+        <validationRegExp>/^(([^@\s]+)@((?:[-a-zA-Z0-9]+\.)+[a-zA-Z]{2,}))?$/</validationRegExp>
+        <valueField/>
+        <classType>com.xpn.xwiki.objects.classes.DBListClass</classType>
+      </emailsRecipients>
       <page>
         <cache>0</cache>
         <classname/>
@@ -140,34 +167,6 @@
         <valueField/>
         <classType>com.xpn.xwiki.objects.classes.PageClass</classType>
       </page>
-      <recipients>
-        <cache>0</cache>
-        <classname/>
-        <customDisplay/>
-        <defaultValue/>
-        <disabled>0</disabled>
-        <displayType>select</displayType>
-        <freeText/>
-        <hint/>
-        <idField/>
-        <largeStorage>0</largeStorage>
-        <multiSelect>0</multiSelect>
-        <name>recipients</name>
-        <number>2</number>
-        <picker>1</picker>
-        <prettyName>recipients</prettyName>
-        <relationalStorage>0</relationalStorage>
-        <separator> </separator>
-        <separators/>
-        <size>1</size>
-        <sort/>
-        <sql/>
-        <unmodifiable>0</unmodifiable>
-        <validationMessage/>
-        <validationRegExp/>
-        <valueField/>
-        <classType>com.xpn.xwiki.objects.classes.DBListClass</classType>
-      </recipients>
       <referrer>
         <customDisplay/>
         <disabled>0</disabled>
@@ -188,7 +187,7 @@
         <defaultValue/>
         <disabled>0</disabled>
         <displayType>input</displayType>
-        <freeText/>
+        <freeText>forbidden</freeText>
         <hint/>
         <largeStorage>0</largeStorage>
         <multiSelect>0</multiSelect>
@@ -202,11 +201,25 @@
         <size>20</size>
         <sort/>
         <unmodifiable>0</unmodifiable>
-        <usesList>0</usesList>
+        <usesList>1</usesList>
         <validationMessage/>
         <validationRegExp/>
         <classType>com.xpn.xwiki.objects.classes.UsersClass</classType>
       </reporter>
+      <reporterEmail>
+        <customDisplay/>
+        <disabled>0</disabled>
+        <hint/>
+        <name>reporterEmail</name>
+        <number>9</number>
+        <picker>1</picker>
+        <prettyName>reporterEmail</prettyName>
+        <size>30</size>
+        <unmodifiable>0</unmodifiable>
+        <validationMessage/>
+        <validationRegExp>/^(([^@\s]+)@((?:[-a-zA-Z0-9]+\.)+[a-zA-Z]{2,}))?$/</validationRegExp>
+        <classType>com.xpn.xwiki.objects.classes.EmailClass</classType>
+      </reporterEmail>
       <screenResolution>
         <customDisplay/>
         <disabled>0</disabled>
@@ -263,33 +276,46 @@
         <validationRegExp/>
         <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
       </userAgent>
+      <usersRecipients>
+        <cache>0</cache>
+        <customDisplay/>
+        <defaultValue/>
+        <disabled>0</disabled>
+        <displayType>input</displayType>
+        <freeText/>
+        <hint/>
+        <largeStorage>0</largeStorage>
+        <multiSelect>1</multiSelect>
+        <name>usersRecipients</name>
+        <number>10</number>
+        <picker>1</picker>
+        <prettyName>usersRecipients</prettyName>
+        <relationalStorage>0</relationalStorage>
+        <separator/>
+        <separators/>
+        <size>20</size>
+        <sort/>
+        <unmodifiable>0</unmodifiable>
+        <usesList>0</usesList>
+        <validationMessage/>
+        <validationRegExp/>
+        <classType>com.xpn.xwiki.objects.classes.UsersClass</classType>
+      </usersRecipients>
     </class>
     <property>
-      <allowedFileType/>
-    </property>
-    <property>
-      <allowedFileTypes>[]</allowedFileTypes>
-    </property>
-    <property>
-      <allowedFileUploadNumber/>
-    </property>
-    <property>
-      <environmentData/>
-    </property>
-    <property>
-      <maxFileSize/>
+      <emailsRecipients/>
     </property>
     <property>
       <page/>
-    </property>
-    <property>
-      <recipients/>
     </property>
     <property>
       <referrer/>
     </property>
     <property>
       <reporter/>
+    </property>
+    <property>
+      <reporterEmail/>
     </property>
     <property>
       <screenResolution/>
@@ -302,6 +328,9 @@
     </property>
     <property>
       <userAgent/>
+    </property>
+    <property>
+      <usersRecipients/>
     </property>
   </object>
   <object>
@@ -318,20 +347,6 @@
       <defaultWeb/>
       <nameField/>
       <validationScript/>
-      <email>
-        <customDisplay/>
-        <disabled>0</disabled>
-        <hint/>
-        <name>email</name>
-        <number>4</number>
-        <picker>1</picker>
-        <prettyName>Email</prettyName>
-        <size>30</size>
-        <unmodifiable>0</unmodifiable>
-        <validationMessage/>
-        <validationRegExp>/^(([^@\s]+)@((?:[-a-zA-Z0-9]+\.)+[a-zA-Z]{2,}))?$/</validationRegExp>
-        <classType>com.xpn.xwiki.objects.classes.EmailClass</classType>
-      </email>
       <firstName>
         <customDisplay/>
         <disabled>0</disabled>
@@ -361,10 +376,10 @@
         <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
       </lastName>
       <message>
-        <contenttype>---</contenttype>
+        <contenttype>PureText</contenttype>
         <customDisplay/>
         <disabled>0</disabled>
-        <editor>---</editor>
+        <editor>PureText</editor>
         <hint/>
         <name>message</name>
         <number>6</number>

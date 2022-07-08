@@ -47,20 +47,6 @@
     <defaultWeb/>
     <nameField/>
     <validationScript/>
-    <email>
-      <customDisplay/>
-      <disabled>0</disabled>
-      <hint/>
-      <name>email</name>
-      <number>4</number>
-      <picker>1</picker>
-      <prettyName>Email</prettyName>
-      <size>30</size>
-      <unmodifiable>0</unmodifiable>
-      <validationMessage/>
-      <validationRegExp>/^(([^@\s]+)@((?:[-a-zA-Z0-9]+\.)+[a-zA-Z]{2,}))?$/</validationRegExp>
-      <classType>com.xpn.xwiki.objects.classes.EmailClass</classType>
-    </email>
     <firstName>
       <customDisplay/>
       <disabled>0</disabled>
@@ -90,10 +76,10 @@
       <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
     </lastName>
     <message>
-      <contenttype>---</contenttype>
+      <contenttype>PureText</contenttype>
       <customDisplay/>
       <disabled>0</disabled>
-      <editor>---</editor>
+      <editor>PureText</editor>
       <hint/>
       <name>message</name>
       <number>6</number>
@@ -228,6 +214,34 @@
         <validationRegExp/>
         <classType>com.xpn.xwiki.objects.classes.BooleanClass</classType>
       </fileUploadRequired>
+      <mailTemplate>
+        <cache>0</cache>
+        <classname/>
+        <customDisplay/>
+        <defaultValue/>
+        <disabled>0</disabled>
+        <displayType>input</displayType>
+        <freeText>allowed</freeText>
+        <hint/>
+        <idField/>
+        <largeStorage>0</largeStorage>
+        <multiSelect>0</multiSelect>
+        <name>mailTemplate</name>
+        <number>9</number>
+        <picker>1</picker>
+        <prettyName>mailTemplate</prettyName>
+        <relationalStorage>0</relationalStorage>
+        <separator> </separator>
+        <separators/>
+        <size>1</size>
+        <sort/>
+        <sql/>
+        <unmodifiable>0</unmodifiable>
+        <validationMessage/>
+        <validationRegExp/>
+        <valueField/>
+        <classType>com.xpn.xwiki.objects.classes.PageClass</classType>
+      </mailTemplate>
       <sendURL>
         <customDisplay/>
         <defaultValue/>
@@ -306,20 +320,23 @@
       <fileUploadRequired>0</fileUploadRequired>
     </property>
     <property>
+      <mailTemplate>FeedbackFormCode.WebsiteFeedbackMailTemplate</mailTemplate>
+    </property>
+    <property>
       <sendURL>1</sendURL>
     </property>
     <property>
       <suggestSendingBrowserEnv>1</suggestSendingBrowserEnv>
     </property>
     <property>
-      <type>Website</type>
+      <type>website</type>
     </property>
     <property>
       <validateAndCustomizeSubmission>#set($feedbackObj = $feedbackDoc.getObject("FeedbackFormCode.WebsiteFeedbackType"))
-#if(($isGuest &amp;&amp; ("$!feedbackObj.get('title')" == "" || "$!feedbackObj.get('irstName')" == "" || "$!feedbackObj.get('lastName')" == "" || "$!feedbackObj.get('email')")) || ("$!feedbackObj.get('subject')" == "" || "$!feedbackObj.get('message')" == ""))
+#if(($isGuest &amp;&amp; ("$!feedbackObj.get('title')" == "" || "$!feedbackObj.get('firstName')" == "" || "$!feedbackObj.get('lastName')" == "" || "$!feedbackObj.get('email')")) || ("$!feedbackObj.get('subject')" == "" || "$!feedbackObj.get('message')" == ""))
   #set($cancelSubmission = "One of the fields is missing. Be sure to fill the subject and the message.")
   #if($isGuest)
-    set($cancelSubmission = "$cancelSubmission Since you are not logged in, the title, the first name, the last name and the email are also required.")
+    #set($cancelSubmission = "$cancelSubmission Since you are not logged in, the title, the first name, the last name and the email are also required.")
   #end
 #end</validateAndCustomizeSubmission>
     </property>
