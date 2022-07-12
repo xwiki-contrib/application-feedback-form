@@ -113,8 +113,7 @@
   #if ("$!xwiki.fileupload.getFileItems()" != '' &amp;&amp; $xwiki.fileupload.getFileItems().size() &gt; 0)
     #foreach($item in $xwiki.fileupload.getFileItems())
       #if ($item.fieldName == 'feedbackFile' &amp;&amp;  "$!item.name" != '')
-        #set ($macro.tempDoc = $xwiki.getDocument('FeedbackFormCode.FeedbackForm'))
-        #set ($macro.attachment = $macro.tempDoc.addAttachment($item.name, $item.inputStream))
+        #set ($macro.attachment = $velocityVariables.feedbackDoc.addAttachment($item.name, $item.inputStream))
         #set ($discard = $macro.mailParameters.put('attachments', [$macro.attachment]))
         #break
       #end
