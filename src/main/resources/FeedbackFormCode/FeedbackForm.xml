@@ -692,6 +692,7 @@ require(['jquery'], function($) {
 
         const fileInput = document.createElement('input');
         fileInput.type = "file";
+        fileInput.name = "feedbackFile";
 
         if (dataset.allowedFileUploadTypes !== '*') {
           fileInput.accept = dataset.allowedFileUploadTypes;
