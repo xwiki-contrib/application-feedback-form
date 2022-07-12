@@ -41,6 +41,10 @@
       <id>mouhb</id>
       <name>Mohamed Boussaa</name>
     </developer>
+    <developer>
+      <id>rjakse</id>
+      <name>Raphaël Jakse</name>
+    </developer>
   </developers>
   <scm>
    <connection>scm:git:git://github.com/xwiki-contrib/application-feedback-form.git</connection>
