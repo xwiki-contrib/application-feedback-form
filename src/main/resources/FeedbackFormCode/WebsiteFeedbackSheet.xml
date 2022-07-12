@@ -1,7 +1,6 @@
 <?xml version="1.1" encoding="UTF-8"?>
 
-<xwikidoc version="1.5" reference="FeedbackFormCode.WebsiteFeedbackSheet" locale="">
-  <!--
+<!--
  * See the NOTICE file distributed with this work for additional
  * information regarding copyright ownership.
  *
@@ -21,6 +20,7 @@
  * 02110-1301 USA, or see the FSF site: http://www.fsf.org.
 -->
 
+<xwikidoc version="1.5" reference="FeedbackFormCode.WebsiteFeedbackSheet" locale="">
   <web>FeedbackFormCode</web>
   <name>WebsiteFeedbackSheet</name>
   <language/>
