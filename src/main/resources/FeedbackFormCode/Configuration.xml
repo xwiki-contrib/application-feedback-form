@@ -201,7 +201,7 @@
       <enabled>1</enabled>
     </property>
     <property>
-      <feedbackRecipientEmail>raphael.jakse@xwiki.com</feedbackRecipientEmail>
+      <feedbackRecipientEmail/>
     </property>
     <property>
       <feedbackSpace>Feedback</feedbackSpace>
@@ -210,7 +210,7 @@
       <generalButtonEnabled>1</generalButtonEnabled>
     </property>
     <property>
-      <platformSenderEmail>raphael.jakse@xwiki.com</platformSenderEmail>
+      <platformSenderEmail/>
     </property>
     <property>
       <publicFeedbackTypes>
@@ -477,7 +477,7 @@
       <propertiesToShow/>
     </property>
     <property>
-      <scope/>
+      <scope>WIKI</scope>
     </property>
     <property>
       <sectionOrder/>
