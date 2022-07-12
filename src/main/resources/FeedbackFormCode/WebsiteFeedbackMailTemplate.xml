@@ -96,32 +96,32 @@
       </text>
     </class>
     <property>
-      <html>$services.localization.render("feedbackform.website.email.${mailRecipient}", $contextLocale)
+      <html>$services.localization.render("feedbackform.types.website.email.${mailRecipient}", $contextLocale)
 
 #if("$!feedbackDoc.get('url')" != "")
   #set($url = $escapetool.xml($feedbackDoc.get('url')))
-  &lt;strong&gt;$services.localization.render('feedbackform.website.email.page', $contextLocale)&lt;/strong&gt; &lt;a href="$url"&gt;$url&lt;/a&gt;
+  &lt;strong&gt;$services.localization.render('feedbackform.types.website.email.page', $contextLocale)&lt;/strong&gt; &lt;a href="$url"&gt;$url&lt;/a&gt;
 #end
 &lt;br/&gt;
 
 #if("$!feedbackDoc.get('reporter')" == "XWiki.Guest")
 &lt;p&gt;
-  &lt;strong&gt;$services.localization.render('feedbackform.website.field.title', $contextLocale): &lt;/strong&gt;
+  &lt;strong&gt;$services.localization.render('feedbackform.types.website.field.title', $contextLocale): &lt;/strong&gt;
   &lt;span style="text-transform: capitalize;"&gt;$!escapetool.xml($feedbackDoc.get('title'))&lt;/span&gt;
 &lt;/p&gt;
 
 &lt;p&gt;
-  &lt;strong&gt;$services.localization.render('feedbackform.website.field.firstName', $contextLocale): &lt;/strong&gt;
+  &lt;strong&gt;$services.localization.render('feedbackform.types.website.field.firstName', $contextLocale): &lt;/strong&gt;
   $!escapetool.xml($feedbackDoc.get('firstName'))
 &lt;/p&gt;
 
 &lt;p&gt;
-  &lt;strong&gt;$services.localization.render('feedbackform.website.field.lastName', $contextLocale): &lt;/strong&gt;
+  &lt;strong&gt;$services.localization.render('feedbackform.types.website.field.lastName', $contextLocale): &lt;/strong&gt;
   $!escapetool.xml($feedbackDoc.get('lastName'))
 &lt;/p&gt;
 
 &lt;p&gt;
-  &lt;strong&gt;$services.localization.render('feedbackform.website.field.email', $contextLocale): &lt;/strong&gt;
+  &lt;strong&gt;$services.localization.render('feedbackform.types.website.field.email', $contextLocale): &lt;/strong&gt;
   $!escapetool.xml($feedbackDoc.get('email'))
 &lt;/p&gt;
 #else
@@ -131,31 +131,31 @@
 #end
 
 &lt;p&gt;
-  &lt;strong&gt;$services.localization.render('feedbackform.website.field.subject', $contextLocale): &lt;/strong&gt;
+  &lt;strong&gt;$services.localization.render('feedbackform.types.website.field.subject', $contextLocale): &lt;/strong&gt;
   $!escapetool.xml($feedbackDoc.get('subject'))
 &lt;/p&gt;
 
 &lt;p&gt;
-  &lt;strong&gt;$services.localization.render('feedbackform.website.field.message', $contextLocale):&lt;/strong&gt;
+  &lt;strong&gt;$services.localization.render('feedbackform.types.website.field.message', $contextLocale):&lt;/strong&gt;
 &lt;/p&gt;
 &lt;hr /&gt;
 &lt;pre style="font-family: sans-serif;font-size:1em"&gt;$!escapetool.xml($feedbackDoc.get('message'))&lt;/pre&gt;
 &lt;hr /&gt;
 #if ("$!feedbackDoc.get('referrer')" != '' || "$!feedbackDoc.get('userAgent')" != '' || "$!feedbackDoc.get('screenResolution')")
   &lt;p&gt;
-    &lt;strong&gt;$services.localization.render('feedbackform.website.environment', $contextLocale): &lt;/strong&gt;
+    &lt;strong&gt;$services.localization.render('feedbackform.types.website.environment', $contextLocale): &lt;/strong&gt;
   &lt;/p&gt;
   &lt;ul&gt;
     &lt;li&gt;
-      $services.localization.render('feedbackform.website.environment.referrer', $contextLocale):
+      $services.localization.render('feedbackform.types.website.environment.referrer', $contextLocale):
       $!escapetool.xml($feedbackDoc.get('referrer'))
     &lt;/li&gt;
     &lt;li&gt;
-      $services.localization.render('feedbackform.website.environment.userAgent', $contextLocale):
+      $services.localization.render('feedbackform.types.website.environment.userAgent', $contextLocale):
       $!escapetool.xml($feedbackDoc.get('userAgent'))
     &lt;/li&gt;
     &lt;li&gt;
-      $services.localization.render('feedbackform.website.environment.screenResolution', $contextLocale):
+      $services.localization.render('feedbackform.types.website.environment.screenResolution', $contextLocale):
       $!escapetool.xml($feedbackDoc.get('screenResolution'))
     &lt;/li&gt;
   &lt;/ul&gt;
@@ -165,7 +165,7 @@
       <language>en</language>
     </property>
     <property>
-      <subject>$services.localization.render("feedbackform.website.email.subject.${mailRecipient}", $contextLocale)</subject>
+      <subject>$services.localization.render("feedbackform.types.website.email.subject.${mailRecipient}", $contextLocale)</subject>
     </property>
     <property>
       <text/>
