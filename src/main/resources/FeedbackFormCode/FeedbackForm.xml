@@ -915,6 +915,10 @@ require(['jquery'], function($) {
   z-index: 300;
 }
 
+@media print {
+  .feedback-button { display: none; }
+}
+
 .feedback-form-fade-bg {
   background: black;
   height: 100%;
