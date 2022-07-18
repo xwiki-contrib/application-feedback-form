@@ -108,7 +108,39 @@
     </subject>
     <title>
       <cache>0</cache>
-      <customDisplay/>
+      <customDisplay>{{velocity}}
+{{html clean=false wiki=false}}
+#set ($cl = $object.getxWikiClass())
+#set ($list = $cl.get($name).getListValues())
+#if ($type == 'edit')
+  #if ("$!value" == "")
+    #set ($value = "other")
+  #end
+  #set ($valueFound = false)
+  &lt;select required="required" id='$prefix$name' name='$prefix$name' class='suggest-propertyValues' data-className='FeedbackFormCode.WebsiteFeedbackType' data-propertyName='title' data-freeText='allowed'&gt;
+    #foreach ($item in $list)
+      #if ("$item" == "$value")
+        #set ($selected = " selected='selected'")
+        #set ($valueFound = true)
+      #else
+        #set ($selected = "")
+      #end
+      &lt;option value='$escapetool.xml($item)'$selected&gt;##
+        $escapetool.xml($services.localization.render("feedbackform.types.website.field.title.$item"))##
+      &lt;/option&gt;
+    #end
+    #if (!$valueFound &amp;&amp; "$!value" != "")
+      #set($xmlValue = $escapetool.xml($value))
+      &lt;option value='$xmlValue' selected='selected'&gt;$xmlValue&lt;/option&gt;
+    #end
+  &lt;/select&gt;
+#elseif($list.contains($value))
+  $escapetool.xml($services.localization.render("feedbackform.types.website.field.title.$value"))
+#else
+  $escapetool.xml($value)
+#end
+{{/html}}
+{{/velocity}}</customDisplay>
       <defaultValue>other</defaultValue>
       <disabled>0</disabled>
       <displayType>input</displayType>
@@ -333,7 +365,7 @@
     </property>
     <property>
       <validateAndCustomizeSubmission>#set($feedbackObj = $feedbackDoc.getObject("FeedbackFormCode.WebsiteFeedbackType"))
-#if(($isGuest &amp;&amp; ("$!feedbackObj.get('title')" == "" || "$!feedbackObj.get('firstName')" == "" || "$!feedbackObj.get('lastName')" == "" || "$!feedbackObj.get('email')")) || ("$!feedbackObj.get('subject')" == "" || "$!feedbackObj.get('message')" == ""))
+#if(($isGuest &amp;&amp; ("$!feedbackObj.get('title')" == "" || "$!feedbackObj.get('firstName')" == "" || "$!feedbackObj.get('lastName')" == "" || "$!feedbackDoc.getValue('reporterEmail')" == "")) || ("$!feedbackObj.get('subject')" == "" || "$!feedbackObj.get('message')" == ""))
   #set($cancelSubmission = "One of the fields is missing. Be sure to fill the subject and the message.")
   #if($isGuest)
     #set($cancelSubmission = "$cancelSubmission Since you are not logged in, the title, the first name, the last name and the email are also required.")

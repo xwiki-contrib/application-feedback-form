@@ -218,7 +218,7 @@
       </publicFeedbackTypes>
     </property>
     <property>
-      <saveToWiki>1</saveToWiki>
+      <saveToWiki>0</saveToWiki>
     </property>
     <property>
       <sendByEmail>1</sendByEmail>
