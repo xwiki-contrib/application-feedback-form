@@ -345,7 +345,14 @@
       <code>/* #set($config = $xwiki.getDocument('FeedbackFormCode.Configuration').getObject('FeedbackFormCode.ConfigurationClass'))
    #if("$config.getProperty('enabled').value" == "0") Feedback is not enabled #else */
 
-require(['jquery'], function($) {
+require.config({
+  paths: {
+    'xwiki-selectize': "$xwiki.getSkinFile('uicomponents/suggest/xwiki.selectize.js', true)" +
+      "?v=$escapetool.url($xwiki.version)"
+  }
+});
+
+require(['jquery', 'xwiki-selectize'], function($) {
   "use strict";
 
   const GENERAL_FEEDBACK_CLASS_NAME = "FeedbackFormCode.FeedbackMetadataClass";
@@ -631,6 +638,8 @@ require(['jquery'], function($) {
     }
   }
 
+  let selectizeLoaded = false;
+
   function showFeedbackForm(config = {}) {
     showLoader();
     $.get(feedbackUrl('load', false, {type: config.type}), function(data) {
@@ -640,7 +649,7 @@ require(['jquery'], function($) {
       const content = $('#feedback-modal-content');
       content.empty().append(data);
 
-      content.find("[data-feedback-required-field]").find("input,textarea").each(function () {
+      content.find("[data-feedback-required-field]").find("input,textarea,select").each(function () {
         this.required = true;
       });
 
@@ -648,6 +657,14 @@ require(['jquery'], function($) {
       if (ckTAs.length) {
         enableCKEditor(ckTAs);
       }
+
+      content.find("select").each(function () {
+        if (!selectizeLoaded) {
+          $("head").append("&lt;link rel='stylesheet' href='$services.webjars.url('selectize.js', 'css/selectize.bootstrap3.css')' /&gt;")
+          selectizeLoaded = true;
+        }
+        $(this).selectize({create: this.dataset.freetext === 'allowed'});
+      });
 
       const typeChoice = document.getElementById("feedbackTypeChoice");
       const type = config.type || typeChoice.value;
