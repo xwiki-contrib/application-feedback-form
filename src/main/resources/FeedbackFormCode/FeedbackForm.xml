@@ -142,6 +142,8 @@
       #set ($discard = $macro.message.setFrom($senderEmail))
       #set ($discard = $macro.message.addRecipient('to', $feedbackUserEmail))
       #set ($mailResult = $services.mail.sender.send($macro.message))
+      #set ($emailSent = $NULL)
+      #checkEmailSendingStatus($mailResult $emailSent)
     #end
   #else
     {"status": false, "message": $jsontool.serialize($services.localization.render('feedbackform.sendingFeedbackError'))}
