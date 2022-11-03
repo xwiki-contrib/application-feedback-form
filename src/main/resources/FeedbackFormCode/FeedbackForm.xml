@@ -594,7 +594,7 @@ require(['jquery', 'xwiki-selectize'], function($) {
       'action=' + action +
       (plain ? '&amp;xpage=plain&amp;outputSyntax=plain' : '') +
       (params ? '&amp;' + $.param(params) : "") +
-      '&amp;language=${xcontext.language}'
+      '&amp;language=${xcontext.locale.toString()}'
     );
   }
 
@@ -794,8 +794,7 @@ require(['jquery', 'xwiki-selectize'], function($) {
     });
   });
 });
-// #end
-</code>
+// #end</code>
     </property>
     <property>
       <name/>
