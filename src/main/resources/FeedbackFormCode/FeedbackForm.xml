@@ -737,9 +737,12 @@ require(['jquery', 'xwiki-selectize'], function($) {
   };
 
   function showMessage(feedbackFormModal, messageType, message) {
-    $('.modal-body', feedbackFormModal).replaceWith(
-      $('&lt;div class="box ' + messageType + 'message"&gt;').text(message)
-    );
+    let modalBody = $('.modal-body');
+    modalBody.empty();
+    let boxMessage = $('&lt;div/&gt;');
+    boxMessage.addClass('box ' + messageType + 'message');
+    boxMessage.text(message);
+    modalBody.append(boxMessage);
     cleanCKEditor();
   }
 
