@@ -104,7 +104,7 @@
 #end
 &lt;br/&gt;
 
-#if("$!feedbackDoc.get('reporter')" == "XWiki.Guest")
+#if("$!feedbackDoc.getValue('reporter')" == 'XWiki.XWikiGuest')
 &lt;p&gt;
   &lt;strong&gt;$services.localization.render('feedbackform.types.website.field.title', $contextLocale): &lt;/strong&gt;
   &lt;span style="text-transform: capitalize;"&gt;$!escapetool.xml($feedbackDoc.get('title'))&lt;/span&gt;
