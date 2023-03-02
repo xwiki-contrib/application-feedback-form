@@ -130,7 +130,7 @@
   #set ($emailSent = $NULL)
   #checkEmailSendingStatus($mailResult $emailSent)
   #if ($emailSent)
-    #set($feedbackUserEmail = $velocityVariables.feedbackDoc.getValue("reporterEmail"))
+    #set($feedbackUserEmail = $velocityVariables.feedbackDoc.getValue('email'))
     #if ("$!feedbackUserEmail" == "" &amp;&amp; !$isGuest)
       #set($feedbackUserEmail = $xwiki.getDocument($xcontext.getUserReference()).getValue('email'))
     #end

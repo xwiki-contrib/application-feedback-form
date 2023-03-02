@@ -47,6 +47,20 @@
     <defaultWeb/>
     <nameField/>
     <validationScript/>
+    <email>
+      <customDisplay/>
+      <disabled>0</disabled>
+      <hint/>
+      <name>email</name>
+      <number>6</number>
+      <picker>0</picker>
+      <prettyName>E-mail</prettyName>
+      <size>30</size>
+      <unmodifiable>0</unmodifiable>
+      <validationMessage/>
+      <validationRegExp/>
+      <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
+    </email>
     <firstName>
       <customDisplay/>
       <disabled>0</disabled>
@@ -365,7 +379,7 @@
     </property>
     <property>
       <validateAndCustomizeSubmission>#set($feedbackObj = $feedbackDoc.getObject("FeedbackFormCode.WebsiteFeedbackType"))
-#if(($isGuest &amp;&amp; ("$!feedbackObj.get('title')" == "" || "$!feedbackObj.get('firstName')" == "" || "$!feedbackObj.get('lastName')" == "" || "$!feedbackDoc.getValue('reporterEmail')" == "")) || ("$!feedbackObj.get('subject')" == "" || "$!feedbackObj.get('message')" == ""))
+#if(($isGuest &amp;&amp; ("$!feedbackObj.get('title')" == "" || "$!feedbackObj.get('firstName')" == "" || "$!feedbackObj.get('lastName')" == "" || "$!feedbackObj.getValue('email')" == "")) || ("$!feedbackObj.get('subject')" == "" || "$!feedbackObj.get('message')" == ""))
   #set($cancelSubmission = "One of the fields is missing. Be sure to fill the subject and the message.")
   #if($isGuest)
     #set($cancelSubmission = "$cancelSubmission Since you are not logged in, the title, the first name, the last name and the email are also required.")
@@ -415,6 +429,50 @@
     </class>
     <property>
       <sheet>FeedbackFormCode.WebsiteFeedbackSheet</sheet>
+    </property>
+  </object>
+  <object>
+    <name>FeedbackFormCode.WebsiteFeedbackType</name>
+    <number>0</number>
+    <className>XWiki.DocumentSheetBinding</className>
+    <guid>9454706f-3944-4dd1-af69-f4d059963cc4</guid>
+    <class>
+      <name>XWiki.DocumentSheetBinding</name>
+      <customClass/>
+      <customMapping/>
+      <defaultViewSheet/>
+      <defaultEditSheet/>
+      <defaultWeb/>
+      <nameField/>
+      <validationScript/>
+      <sheet>
+        <cache>0</cache>
+        <classname/>
+        <customDisplay/>
+        <disabled>0</disabled>
+        <displayType>input</displayType>
+        <hint/>
+        <idField/>
+        <multiSelect>0</multiSelect>
+        <name>sheet</name>
+        <number>1</number>
+        <picker>1</picker>
+        <prettyName>Sheet</prettyName>
+        <relationalStorage>0</relationalStorage>
+        <separator> </separator>
+        <separators/>
+        <size>30</size>
+        <sort>none</sort>
+        <sql/>
+        <unmodifiable>0</unmodifiable>
+        <validationMessage/>
+        <validationRegExp/>
+        <valueField/>
+        <classType>com.xpn.xwiki.objects.classes.PageClass</classType>
+      </sheet>
+    </class>
+    <property>
+      <sheet>XWiki.ClassSheet</sheet>
     </property>
   </object>
 </xwikidoc>

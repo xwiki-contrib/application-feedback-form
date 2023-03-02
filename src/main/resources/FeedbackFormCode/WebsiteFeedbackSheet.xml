@@ -205,20 +205,6 @@
         <validationRegExp/>
         <classType>com.xpn.xwiki.objects.classes.UsersClass</classType>
       </reporter>
-      <reporterEmail>
-        <customDisplay/>
-        <disabled>0</disabled>
-        <hint/>
-        <name>reporterEmail</name>
-        <number>9</number>
-        <picker>1</picker>
-        <prettyName>reporterEmail</prettyName>
-        <size>30</size>
-        <unmodifiable>0</unmodifiable>
-        <validationMessage/>
-        <validationRegExp>/^(([^@\s]+)@((?:[-a-zA-Z0-9]+\.)+[a-zA-Z]{2,}))?$/</validationRegExp>
-        <classType>com.xpn.xwiki.objects.classes.EmailClass</classType>
-      </reporterEmail>
       <screenResolution>
         <customDisplay/>
         <disabled>0</disabled>
@@ -346,6 +332,20 @@
       <defaultWeb/>
       <nameField/>
       <validationScript/>
+      <email>
+        <customDisplay/>
+        <disabled>0</disabled>
+        <hint/>
+        <name>email</name>
+        <number>6</number>
+        <picker>0</picker>
+        <prettyName>E-mail</prettyName>
+        <size>30</size>
+        <unmodifiable>0</unmodifiable>
+        <validationMessage/>
+        <validationRegExp/>
+        <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
+      </email>
       <firstName>
         <customDisplay/>
         <disabled>0</disabled>
@@ -407,7 +407,39 @@
       </subject>
       <title>
         <cache>0</cache>
-        <customDisplay/>
+        <customDisplay>{{velocity}}
+{{html clean=false wiki=false}}
+#set ($cl = $object.getxWikiClass())
+#set ($list = $cl.get($name).getListValues())
+#if ($type == 'edit')
+  #if ("$!value" == "")
+    #set ($value = "other")
+  #end
+  #set ($valueFound = false)
+  &lt;select required="required" id='$prefix$name' name='$prefix$name' class='suggest-propertyValues' data-className='FeedbackFormCode.WebsiteFeedbackType' data-propertyName='title' data-freeText='allowed'&gt;
+    #foreach ($item in $list)
+      #if ("$item" == "$value")
+        #set ($selected = " selected='selected'")
+        #set ($valueFound = true)
+      #else
+        #set ($selected = "")
+      #end
+      &lt;option value='$escapetool.xml($item)'$selected&gt;##
+        $escapetool.xml($services.localization.render("feedbackform.types.website.field.title.$item"))##
+      &lt;/option&gt;
+    #end
+    #if (!$valueFound &amp;&amp; "$!value" != "")
+      #set($xmlValue = $escapetool.xml($value))
+      &lt;option value='$xmlValue' selected='selected'&gt;$xmlValue&lt;/option&gt;
+    #end
+  &lt;/select&gt;
+#elseif($list.contains($value))
+  $escapetool.xml($services.localization.render("feedbackform.types.website.field.title.$value"))
+#else
+  $escapetool.xml($value)
+#end
+{{/html}}
+{{/velocity}}</customDisplay>
         <defaultValue>other</defaultValue>
         <disabled>0</disabled>
         <displayType>input</displayType>

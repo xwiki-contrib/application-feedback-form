@@ -142,20 +142,6 @@
       <validationRegExp/>
       <classType>com.xpn.xwiki.objects.classes.UsersClass</classType>
     </reporter>
-    <reporterEmail>
-      <customDisplay/>
-      <disabled>0</disabled>
-      <hint/>
-      <name>reporterEmail</name>
-      <number>9</number>
-      <picker>1</picker>
-      <prettyName>reporterEmail</prettyName>
-      <size>30</size>
-      <unmodifiable>0</unmodifiable>
-      <validationMessage/>
-      <validationRegExp>/^(([^@\s]+)@((?:[-a-zA-Z0-9]+\.)+[a-zA-Z]{2,}))?$/</validationRegExp>
-      <classType>com.xpn.xwiki.objects.classes.EmailClass</classType>
-    </reporterEmail>
     <screenResolution>
       <customDisplay/>
       <disabled>0</disabled>
@@ -238,4 +224,48 @@
       <classType>com.xpn.xwiki.objects.classes.UsersClass</classType>
     </usersRecipients>
   </class>
+  <object>
+    <name>FeedbackFormCode.FeedbackMetadataClass</name>
+    <number>0</number>
+    <className>XWiki.DocumentSheetBinding</className>
+    <guid>05383d22-6277-4742-902c-f1f7ed8058c4</guid>
+    <class>
+      <name>XWiki.DocumentSheetBinding</name>
+      <customClass/>
+      <customMapping/>
+      <defaultViewSheet/>
+      <defaultEditSheet/>
+      <defaultWeb/>
+      <nameField/>
+      <validationScript/>
+      <sheet>
+        <cache>0</cache>
+        <classname/>
+        <customDisplay/>
+        <disabled>0</disabled>
+        <displayType>input</displayType>
+        <hint/>
+        <idField/>
+        <multiSelect>0</multiSelect>
+        <name>sheet</name>
+        <number>1</number>
+        <picker>1</picker>
+        <prettyName>Sheet</prettyName>
+        <relationalStorage>0</relationalStorage>
+        <separator> </separator>
+        <separators/>
+        <size>30</size>
+        <sort>none</sort>
+        <sql/>
+        <unmodifiable>0</unmodifiable>
+        <validationMessage/>
+        <validationRegExp/>
+        <valueField/>
+        <classType>com.xpn.xwiki.objects.classes.PageClass</classType>
+      </sheet>
+    </class>
+    <property>
+      <sheet>XWiki.ClassSheet</sheet>
+    </property>
+  </object>
 </xwikidoc>
