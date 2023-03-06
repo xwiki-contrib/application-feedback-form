@@ -109,15 +109,16 @@
   #set ($macro.mailParameters = {'language' : 'en', 'velocityVariables' : $velocityVariables})
   #set ($discard = $macro.mailParameters.velocityVariables.put('contextLocale', $xcontext.locale))
   #set ($discard = $macro.mailParameters.velocityVariables.put('mailRecipient', 'wiki'))
-  ## Add the attachment to the mail
+  ## Add the attachments to the mail
   #if ("$!xwiki.fileupload.getFileItems()" != '' &amp;&amp; $xwiki.fileupload.getFileItems().size() &gt; 0)
+    #set ($macro.attachments = [])
     #foreach($item in $xwiki.fileupload.getFileItems())
       #if ($item.fieldName == 'feedbackFile' &amp;&amp;  "$!item.name" != '')
         #set ($macro.attachment = $velocityVariables.feedbackDoc.addAttachment($item.name, $item.inputStream))
-        #set ($discard = $macro.mailParameters.put('attachments', [$macro.attachment]))
-        #break
+        #set ($discard = $macro.attachments.add($macro.attachment))
       #end
     #end
+    #set ($discard = $macro.mailParameters.put('attachments', $macro.attachments))
   #end
   ##
   #getSenderEmail($senderEmail)
