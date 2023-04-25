@@ -611,11 +611,15 @@ require(['jquery', 'xwiki-selectize'], function($) {
   function showLoader() {
     $('#fade-bg').show();
     $('#feedback-form-loading').show();
+    $('#submitFeedbackButton').prepend('&lt;span class="fa fa-spinner fa-spin"/&gt;');
+    $('#submitFeedbackButton').attr("disabled", true);
   };
 
   function hideLoader() {
     $('#fade-bg').hide();
     $('#feedback-form-loading').hide();
+    $('#submitFeedbackButton').find('span').remove();
+    $('#submitFeedbackButton').attr("disabled", false);
   };
 
   function enableCKEditor(textareas) {
