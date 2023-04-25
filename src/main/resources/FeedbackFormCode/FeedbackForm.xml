@@ -751,7 +751,7 @@ require(['jquery', 'xwiki-selectize'], function($) {
   };
 
   function showMessage(feedbackFormModal, messageType, message) {
-    let modalBody = $('.modal-body');
+    let modalBody = $('#feedback-modal .modal-body');
     modalBody.empty();
     let boxMessage = $('&lt;div/&gt;');
     boxMessage.addClass('box ' + messageType + 'message');
