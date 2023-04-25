@@ -125,11 +125,17 @@
   #set ($macro.message = $services.mail.sender.createMessage('template', $macro.templateReference, $macro.mailParameters))
   #set ($discard = $macro.message.setFrom($senderEmail))
   #foreach ($recipient in $velocityVariables.emailsRecipients)
-    #set ($discard = $macro.message.addRecipient('to', $recipient))
+    #if ("$!recipient" != "")
+      #set ($discard = $macro.message.addRecipient('to', $recipient))
+    #end
   #end
   #set ($mailResult = $services.mail.sender.send($macro.message))
   #set ($emailSent = $NULL)
-  #checkEmailSendingStatus($mailResult $emailSent)
+  #if ($macro.message.getRecipients().length &gt; 0)
+    #checkEmailSendingStatus($mailResult $emailSent)
+  #else
+    #set($emailSent = true)
+  #end
   #if ($emailSent)
     #set($feedbackUserEmail = $velocityVariables.feedbackDoc.getValue('email'))
     #if ("$!feedbackUserEmail" == "" &amp;&amp; !$isGuest)
@@ -141,10 +147,14 @@
       #set ($discard = $macro.mailParameters.velocityVariables.put('mailRecipient', 'user'))
       #set ($macro.message = $services.mail.sender.createMessage('template', $macro.templateReference, $macro.mailParameters))
       #set ($discard = $macro.message.setFrom($senderEmail))
-      #set ($discard = $macro.message.addRecipient('to', $feedbackUserEmail))
-      #set ($mailResult = $services.mail.sender.send($macro.message))
-      #set ($emailSent = $NULL)
-      #checkEmailSendingStatus($mailResult $emailSent)
+      #if ("$!feedbackUserEmail" != "")
+        #set ($discard = $macro.message.addRecipient('to', $feedbackUserEmail))
+      #end
+      #if ($macro.message.getRecipients().length &gt; 0)
+        #set ($mailResult = $services.mail.sender.send($macro.message))
+        #set ($emailSent = $NULL)
+        #checkEmailSendingStatus($mailResult $emailSent)
+      #end
     #end
   #else
     {"status": false, "message": $jsontool.serialize($services.localization.render('feedbackform.sendingFeedbackError'))}
@@ -245,8 +255,7 @@
 #elseif($action == 'submit')
   #submitFeedback()
 #end
-{{/velocity}}
-</content>
+{{/velocity}}</content>
   <attachment>
     <filename>download.gif</filename>
     <mimetype>image/gif</mimetype>
