@@ -948,6 +948,11 @@ require(['jquery', 'xwiki-selectize'], function($) {
   text-decoration: none !important;
   white-space: nowrap;
   z-index: 300;
+  transition: background-color .4s ease, border-color .4s ease;
+  &amp;:hover, &amp;:focus {
+    background: @btn-primary-color;
+    border-color: @btn-primary-bg;
+  }
 }
 
 @media print {
