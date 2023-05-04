@@ -1,0 +1,94 @@
+<?xml version="1.1" encoding="UTF-8"?>
+
+<!--
+ * See the NOTICE file distributed with this work for additional
+ * information regarding copyright ownership.
+ *
+ * This is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as
+ * published by the Free Software Foundation; either version 2.1 of
+ * the License, or (at your option) any later version.
+ *
+ * This software is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with this software; if not, write to the Free
+ * Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
+ * 02110-1301 USA, or see the FSF site: http://www.fsf.org.
+-->
+
+<xwikidoc version="1.5" reference="FeedbackFormCode.Translations" locale="fr">
+  <web>FeedbackFormCode</web>
+  <name>Translations</name>
+  <language>fr</language>
+  <defaultLanguage>en</defaultLanguage>
+  <translation>1</translation>
+  <creator>xwiki:XWiki.Admin</creator>
+  <parent>WebHome</parent>
+  <author>xwiki:XWiki.Admin</author>
+  <originalMetadataAuthor>xwiki:XWiki.Admin</originalMetadataAuthor>
+  <contentAuthor>xwiki:XWiki.Admin</contentAuthor>
+  <version>1.1</version>
+  <title/>
+  <comment/>
+  <minorEdit>false</minorEdit>
+  <syntaxId>plain/1.0</syntaxId>
+  <hidden>true</hidden>
+  <content>## Feedback form
+### Missing: feedbackform.buttonLabel=Feedback
+### Missing: feedbackform.title=Feedback
+### Missing: feedbackform.introText=Thank you for your feedback!&lt;br/&gt;We will review your message as soon as possible. Normally we do not contact you back on this subject. However, we will take the liberty of reaching out to you if we have any questions.
+### Missing: feedbackform.type=Feedback Type
+### Missing: feedbackform.type.currentPage=Current page
+feedbackform.type.other=Autre
+feedbackform.types.website=Site web
+feedbackform.types.website.field.title=Titre
+### Missing: feedbackform.types.website.field.title.ms=Ms.
+### Missing: feedbackform.types.website.field.title.mr=Mr.
+### Missing: feedbackform.types.website.field.title.other=Other
+feedbackform.types.website.field.firstName=Prénom
+feedbackform.types.website.field.lastName=Nom
+feedbackform.user.reporter=Rapporteur
+feedbackform.types.website.field.email=E-mail
+feedbackform.types.website.field.subject=Sujet
+feedbackform.types.website.field.message=Message
+### Missing: feedbackform.types.website.confirmationMessage=Thank you for your feedback! It is highly appreciated and it helps us improve our website!
+### Missing: feedbackform.types.website.email.page=Page:
+### Missing: feedbackform.types.website.email.user=Thank you for taking the time to give us your feedback on our website!&lt;br/&gt;We will review it as soon as possible.&lt;br/&gt;See the details of your feedback below: &lt;br/&gt;&lt;br/&gt;
+### Missing: feedbackform.types.website.email.subject.user=Your feedback
+### Missing: feedbackform.types.website.email.wiki=A new feedback has been sent!&lt;br/&gt;See the details of the feedback below: &lt;br/&gt;&lt;br/&gt;
+### Missing: feedbackform.types.website.email.subject.wiki=New user feedback
+### Missing: feedbackform.confirmationMessage=Thank you for your feedback!
+### Missing: feedbackform.attachment=Image or File (max. 5MB,JPG, PNG, PDF)
+### Missing: feedbackform.consentMessage=Provide data from your environment, eg. browser and page URL. This helps us understand your feedback.
+### Missing: feedbackform.sendFeedback=Send feedback
+### Missing: feedbackform.invalidFile=Only jpeg, png, and pdf formats are allowed and file size must not exceed 5 MB!
+### Missing: feedbackform.invalidFormData=An error occurred while sending the feedback. The following fields are required: Feedback type, Title, First name, Last name, E-mail, Subject, Message. Note that, when a file is attached, it must be in one of these formats: 'JPG, PNG, PDF' and  not exceed a size of 5MB.
+### Missing: feedbackform.sendingFeedbackError=An error occurred while sending the feedback.
+### Missing: feedbackform.sendingEmailFeedbackError=An error occurred while sending feedback form email, Error: {}
+### Missing: feedbackform.submitError=An error occurred while sending the feedback:
+### Missing: feedbackform.types.website.environment=Environment
+### Missing: feedbackform.types.website.environment.pageURL=Location
+### Missing: feedbackform.types.website.environment.referrer=Referrer
+### Missing: feedbackform.types.website.environment.userAgent=User Agent
+### Missing: feedbackform.types.website.environment.screenResolution=Screen Resolution
+### Missing: feedbackform.labelAttachFilesOrImages=Attach files or images
+### Missing: feedbackform.labelAttachFileOrImage=Attach a file or an image
+### Missing: feedbackform.labelAttachFile=Attach files
+### Missing: feedbackform.labelAttachFiles=Attach a file
+### Missing: feedbackform.tooManyFiles=You are trying to send {0} files. The maximum is {1}. Please remove some.
+### Missing: feedbackform.maxFileSizeExceededSeveral=You are trying to send {0}, which is higher than the allowed maximum of {1}. Please send fewer or smaller files.
+### Missing: feedbackform.maxFileSizeExceededOne=You are trying to send {0}, which is higher than the allowed maximum of {1}. Please send a smaller file.
+### Missing: feedbackform.fileSizeUnit.B=B
+### Missing: feedbackform.fileSizeUnit.KB=KB
+### Missing: feedbackform.fileSizeUnit.MB=MB
+### Missing: feedbackform.fileSizeUnit.GB=GB
+### Missing: feedbackform.labelMax=max.
+### Missing: feedbackform.labelFiles={0} files
+### Missing: feedbackform.wysiwygFieldRequired=Please fill in all the required fields
+### Missing: feedbackform.incorrectFileType=Incorrect file type. Accepted types or extensions: {0}
+</content>
+  </xwikidoc>
