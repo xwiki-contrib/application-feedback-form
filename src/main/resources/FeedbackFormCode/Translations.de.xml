@@ -1,1 +1,94 @@
+<?xml version="1.1" encoding="UTF-8"?>
 
+<!--
+ * See the NOTICE file distributed with this work for additional
+ * information regarding copyright ownership.
+ *
+ * This is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as
+ * published by the Free Software Foundation; either version 2.1 of
+ * the License, or (at your option) any later version.
+ *
+ * This software is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with this software; if not, write to the Free
+ * Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
+ * 02110-1301 USA, or see the FSF site: http://www.fsf.org.
+-->
+
+<xwikidoc version="1.5" reference="FeedbackFormCode.Translations" locale="de">
+  <web>FeedbackFormCode</web>
+  <name>Translations</name>
+  <language>de</language>
+  <defaultLanguage>en</defaultLanguage>
+  <translation>1</translation>
+  <creator>xwiki:XWiki.Admin</creator>
+  <parent>WebHome</parent>
+  <author>xwiki:XWiki.Admin</author>
+  <originalMetadataAuthor>xwiki:XWiki.Admin</originalMetadataAuthor>
+  <contentAuthor>xwiki:XWiki.Admin</contentAuthor>
+  <version>1.1</version>
+  <title/>
+  <comment/>
+  <minorEdit>false</minorEdit>
+  <syntaxId>plain/1.0</syntaxId>
+  <hidden>true</hidden>
+  <content>## Feedback form
+feedbackform.buttonLabel=Feedback
+feedbackform.title=Feedback
+feedbackform.introText=Vielen Dank für das Feedback.&lt;br/&gt;Wir werden die Nachricht so schnell wie möglich prüfen. Normalerweise antworten wir nicht weiter zu diesem Thema. Wir werden uns jedoch melden, wenn wir Fragen haben.
+feedbackform.type=Art des Feedbacks
+feedbackform.type.currentPage=Aktuelle Seite
+feedbackform.type.other=Andere
+feedbackform.types.website=Webseite
+feedbackform.types.website.field.title=Titel
+feedbackform.types.website.field.title.ms=Frau
+feedbackform.types.website.field.title.mr=Herr
+feedbackform.types.website.field.title.other=Andere
+feedbackform.types.website.field.firstName=Vorname
+feedbackform.types.website.field.lastName=Nachname
+feedbackform.user.reporter=Wer meldet
+feedbackform.types.website.field.email=E-Mail
+feedbackform.types.website.field.subject=Betreff
+feedbackform.types.website.field.message=Nachricht
+feedbackform.types.website.confirmationMessage=Vielen Dank für das Feedback! Wir schätzen es sehr und es hilft uns, unsere Website zu verbessern!
+feedbackform.types.website.email.page=Seite:
+feedbackform.types.website.email.user=Vielen Dank, dass Du Dir die Zeit genommen hast, uns Feedback zu unserer Website zu geben.&lt;br/&gt;Wir werden es so schnell wie möglich überprüfen.&lt;br/&gt;Details zum Feedback stehen unten: &lt;br/&gt;&lt;br/&gt;
+feedbackform.types.website.email.subject.user=Dein Feedback
+feedbackform.types.website.email.wiki=Ein neues Feedback wurde gesendet!&lt;br/&gt;Siehe die Details des Feedbacks unten: &lt;br/&gt;&lt;br/&gt;
+feedbackform.types.website.email.subject.wiki=Neues Nutzer-Feedback
+feedbackform.confirmationMessage=Vielen Dank für das Feedback!
+feedbackform.attachment=Bild oder Datei (max. 5 MB, JPG, PNG, PDF)
+feedbackform.consentMessage=Weitere Angaben zur Benutzungsumgebung (z.B. Browser, Seiten-URL) helfen uns, das Feedback genauer zu verstehen.
+feedbackform.sendFeedback=Feedback absenden
+feedbackform.invalidFile=Nur die Dateiformate JPEG, PNG und PDF sind erlaubt. Die Datei darf nicht größer als 5 MB sein.
+feedbackform.invalidFormData=Beim Senden des Feedbacks ist ein Fehler aufgetreten. Die folgenden Felder sind erforderlich: Feedback-Art, Titel, Vorname, Nachname, E-Mail, Betreff, Nachricht. Beachte, dass eine angehängte Datei in einem der Formate JPG, PNG oder PDF vorliegen muss und eine Größe von 5 MB nicht überschreiten darf.
+feedbackform.sendingFeedbackError=Beim Senden des Feedbacks ist ein Fehler aufgetreten.
+feedbackform.sendingEmailFeedbackError=Beim Senden der E-Mail mit dem Feedback-Formular ist ein Fehler aufgetreten, Fehler: {}
+feedbackform.submitError=Beim Senden des Feedbacks ist ein Fehler aufgetreten:
+feedbackform.types.website.environment=Benutzungsumgebung
+feedbackform.types.website.environment.pageURL=Speicherort
+feedbackform.types.website.environment.referrer=Referrer
+feedbackform.types.website.environment.userAgent=User Agent (Browser)
+feedbackform.types.website.environment.screenResolution=Bildschirmauflösung
+feedbackform.labelAttachFilesOrImages=Dateien oder Bilder anhängen
+feedbackform.labelAttachFileOrImage=Eine Datei oder ein Bild anhängen
+feedbackform.labelAttachFile=Dateien anhängen
+feedbackform.labelAttachFiles=Eine Datei anhängen
+feedbackform.tooManyFiles=Es wird versucht, {0} Dateien zu senden. Das Maximum ist {1}. Bitte reduzieren.
+feedbackform.maxFileSizeExceededSeveral=Es wird versucht, {0} zu senden, was über dem zulässigen Maximum von {1} liegt. Bitte weniger oder kleinere Dateien senden.
+feedbackform.maxFileSizeExceededOne=Es wird versucht, {0} zu senden, was über dem zulässigen Maximum von {1} liegt. Bitte eine kleinere Datei senden.
+feedbackform.fileSizeUnit.B=B
+feedbackform.fileSizeUnit.KB=KB
+feedbackform.fileSizeUnit.MB=MB
+feedbackform.fileSizeUnit.GB=GB
+feedbackform.labelMax=max.
+feedbackform.labelFiles={0} Dateien
+feedbackform.wysiwygFieldRequired=Bitte alle erforderlichen Felder ausfüllen
+feedbackform.incorrectFileType=Falscher Dateityp. Akzeptierte Formate oder Erweiterungen: {0}
+</content>
+  </xwikidoc>
