@@ -84,7 +84,7 @@
 #end
 
 #macro(getSenderEmail $senderEmail)
-  #set ($feedbackFormConfigurationObj = $xwiki.getDocument('FeedbackFormCode.Configuration').getObject('FeedbackFormCode.ConfigurationClass'))
+  #set ($feedbackFormConfigurationObj = $xwiki.getDocumentAsAuthor('FeedbackFormCode.Configuration').getObject('FeedbackFormCode.ConfigurationClass'))
   #set ($macro.email = $feedbackFormConfigurationObj.getProperty('platformSenderEmail').value)
   #if ("$!macro.email" == '')
     #set ($macro.email = $services.mail.sender.configuration.fromAddress)
@@ -94,7 +94,7 @@
 #end
 
 #macro(getFeedbackRecipientEmail $recipientEmail)
-  #set ($feedbackFormConfigurationObj = $xwiki.getDocument('FeedbackFormCode.Configuration').getObject('FeedbackFormCode.ConfigurationClass'))
+  #set ($feedbackFormConfigurationObj = $xwiki.getDocumentAsAuthor('FeedbackFormCode.Configuration').getObject('FeedbackFormCode.ConfigurationClass'))
   #set ($macro.email = $feedbackFormConfigurationObj.getProperty('feedbackRecipientEmail').value)
   #if ("$!macro.email" == '')
     #set ($macro.email = $services.mail.sender.configuration.fromAddress)
@@ -105,7 +105,7 @@
 
 ## Send a mail to wiki and to the user who added the feedback with a summary of the feedback
 #macro(sendMail $velocityVariables $confirmationMessage $emailSent)
-  #set ($macro.templateReference = $xwiki.getDocument($velocityVariables.emailTemplate).documentReference)
+  #set ($macro.templateReference = $xwiki.getDocumentAsAuthor($velocityVariables.emailTemplate).documentReference)
   #set ($macro.mailParameters = {'language' : 'en', 'velocityVariables' : $velocityVariables})
   #set ($discard = $macro.mailParameters.velocityVariables.put('contextLocale', $xcontext.locale))
   #set ($discard = $macro.mailParameters.velocityVariables.put('mailRecipient', 'wiki'))
@@ -139,7 +139,7 @@
   #if ($emailSent)
     #set($feedbackUserEmail = $velocityVariables.feedbackDoc.getValue('email'))
     #if ("$!feedbackUserEmail" == "" &amp;&amp; !$isGuest)
-      #set($feedbackUserEmail = $xwiki.getDocument($xcontext.getUserReference()).getValue('email'))
+      #set($feedbackUserEmail = $xwiki.getDocumentAsAuthor($xcontext.getUserReference()).getValue('email'))
     #end
     {"status": true, "message": $jsontool.serialize($confirmationMessage)}
     ## Send email to the user who added the feedback
@@ -164,18 +164,18 @@
 #macro(submitFeedback)
   $response.setContentType('application/json')
   #set ($type = $request.type)
-  #set ($feedbackTypeObj = $xwiki.getDocument($type).getObject("FeedbackFormCode.FeedbackTypeClass"))
+  #set ($feedbackTypeObj = $xwiki.getDocumentAsAuthor($type).getObject("FeedbackFormCode.FeedbackTypeClass"))
   #if (!$!feedbackTypeObj)
     {"status": false, "message": "Error: Wrong feedback type."}
     #break
   #end
   #set ($shortType = $feedbackTypeObj.getValue("type"))
-  #set ($config = $xwiki.getDocument("FeedbackFormCode.Configuration").getObject("FeedbackFormCode.ConfigurationClass"))
+  #set ($config = $xwiki.getDocumentAsAuthor("FeedbackFormCode.Configuration").getObject("FeedbackFormCode.ConfigurationClass"))
   #set ($space = "${config.getValue('feedbackSpace')}.$shortType")
   #set ($date = $xwiki.jodatime.getDateTime().toString('YYY-MM-dd_HH\:mm\:ss'))
   #set ($user = $xcontext.user)
   #set ($escapedUser = $stringtool.replace($user, ".", "\."))
-  #set ($feedbackDoc = $xwiki.getDocument("$space", "${space}.${date}-${escapedUser}"))
+  #set ($feedbackDoc = $xwiki.getDocumentAsAuthor("${space}.${date}-${escapedUser}"))
   #set ($discard = $feedbackDoc.addObjectFromRequest("FeedbackFormCode.FeedbackMetadataClass"))
   #getFeedbackRecipientEmail($feedbackRecipientEmail)
   #set ($feedbackMetadata = $feedbackDoc.getObject("FeedbackFormCode.FeedbackMetadataClass"))
@@ -195,14 +195,14 @@
   #if ("$config.getValue('saveToWiki')" == "1")
     ## this needs to be done after submission customization and before
     ## sending mails so mail templates can retrieve the feedback document URL.
-    #set ($discard = $feedbackDoc.save())
+    #set ($discard = $feedbackDoc.saveAsAuthor())
   #end
   #set ($emailsRecipients = [])
   #foreach($emailRecipient in $stringtool.split($!feedbackMetadata.getValue("emailsRecipients"), ","))
     #set($discard = $emailsRecipients.add($emailRecipient))
   #end
   #foreach ($userRecipient in $stringtool.split($!feedbackMetadata.getValue("usersRecipients"), ","))
-    #set ($userRecipientEmail = $xwiki.getDocument($userRecipient.trim()).getValue('email'))
+    #set ($userRecipientEmail = $xwiki.getDocumentAsAuthor($userRecipient.trim()).getValue('email'))
     #if ("$!userRecipientEmail" != "")
        #set($discard = $emailsRecipients.add($userRecipientEmail))
     #end
@@ -235,9 +235,9 @@
 #if ($action == 'load')
   #set ($type = "$!request.type")
   #if ("$type" == "")
-    #set ($type = $xwiki.getDocument("FeedbackFormCode.Configuration").getValue("publicFeedbackTypes")[0])
+    #set ($type = $xwiki.getDocumentAsAuthor("FeedbackFormCode.Configuration").getValue("publicFeedbackTypes")[0])
   #end
-  #set ($typeDoc = $xwiki.getDocument($type))
+  #set ($typeDoc = $xwiki.getDocumentAsAuthor($type))
   #set ($typeSheet = $typeDoc.getObject('XWiki.ClassSheetBinding').getValue('sheet'))
   #set ($typeConfig = $typeDoc.getObject('FeedbackFormCode.FeedbackTypeClass'))
   #set ($discard = $xcontext.setDisplayMode('edit'))
