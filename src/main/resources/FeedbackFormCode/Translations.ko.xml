@@ -1,1 +1,94 @@
+<?xml version="1.1" encoding="UTF-8"?>
 
+<!--
+ * See the NOTICE file distributed with this work for additional
+ * information regarding copyright ownership.
+ *
+ * This is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as
+ * published by the Free Software Foundation; either version 2.1 of
+ * the License, or (at your option) any later version.
+ *
+ * This software is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with this software; if not, write to the Free
+ * Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
+ * 02110-1301 USA, or see the FSF site: http://www.fsf.org.
+-->
+
+<xwikidoc version="1.5" reference="FeedbackFormCode.Translations" locale="ko">
+  <web>FeedbackFormCode</web>
+  <name>Translations</name>
+  <language>ko</language>
+  <defaultLanguage>en</defaultLanguage>
+  <translation>1</translation>
+  <creator>xwiki:XWiki.Admin</creator>
+  <parent>WebHome</parent>
+  <author>xwiki:XWiki.Admin</author>
+  <originalMetadataAuthor>xwiki:XWiki.Admin</originalMetadataAuthor>
+  <contentAuthor>xwiki:XWiki.Admin</contentAuthor>
+  <version>1.1</version>
+  <title/>
+  <comment/>
+  <minorEdit>false</minorEdit>
+  <syntaxId>plain/1.0</syntaxId>
+  <hidden>true</hidden>
+  <content>## Feedback form
+feedbackform.buttonLabel=피드백
+feedbackform.title=피드백
+feedbackform.introText=의견을 보내 주셔서 감사합니다!&lt;br/&gt;가능한 한 빨리 귀하의 메시지를 검토 하겠습니다 . 일반적으로 우리는 이 주제에 대해 귀하에게 다시 연락하지 않습니다. 하지만 궁금한 점이 있으면 언제든지 연락드리겠습니다.
+feedbackform.type=피드백 유형
+feedbackform.type.currentPage=현재 페이지
+feedbackform.type.other=다른
+feedbackform.types.website=웹사이트
+feedbackform.types.website.field.title=제목
+feedbackform.types.website.field.title.ms=부인
+feedbackform.types.website.field.title.mr=씨.
+feedbackform.types.website.field.title.other=다른
+feedbackform.types.website.field.firstName=이름
+feedbackform.types.website.field.lastName=성
+feedbackform.user.reporter=보고자
+feedbackform.types.website.field.email=이메일
+feedbackform.types.website.field.subject=주제
+feedbackform.types.website.field.message=메시지
+feedbackform.types.website.confirmationMessage=의견을 보내 주셔서 감사합니다! 매우 감사하며 웹사이트를 개선하는 데 도움이 됩니다!
+feedbackform.types.website.email.page=페이지:
+feedbackform.types.website.email.user=시간을 내어 저희 웹사이트에 피드백을 남겨주셔서 감사합니다!&lt;br/&gt;최대한 빨리 검토해 보겠습니다 .&lt;br/&gt;아래에서 피드백 세부정보를 확인하세요.&lt;br/&gt;&lt;br/&gt;
+feedbackform.types.website.email.subject.user=귀하의 의견
+feedbackform.types.website.email.wiki=새로운 피드백이 전송되었습니다!&lt;br/&gt;아래에서 피드백 세부정보를 확인하세요.&lt;br/&gt;&lt;br/&gt;
+feedbackform.types.website.email.subject.wiki=새로운 사용자 피드백
+feedbackform.confirmationMessage=의견을 보내 주셔서 감사합니다!
+feedbackform.attachment=새 메시지가 추가되었습니다.
+feedbackform.consentMessage=귀하의 환경에서 데이터를 제공하십시오. 브라우저 및 페이지 URL. 이는 귀하의 의견을 이해하는 데 도움이 됩니다.
+feedbackform.sendFeedback=피드백 보내기
+feedbackform.invalidFile=JPEG, PNG 및 PDF 형식만 허용됩니다. 파일 크기는 5MB를 초과할 수 없습니다.
+feedbackform.invalidFormData=삭제 진행 중...
+feedbackform.sendingFeedbackError=삭제 진행 중...
+feedbackform.sendingEmailFeedbackError=삭제 진행 중...
+feedbackform.submitError=삭제 진행 중...
+feedbackform.types.website.environment=삭제 진행 중...
+feedbackform.types.website.environment.pageURL=삭제 진행 중...
+feedbackform.types.website.environment.referrer=삭제 진행 중...
+feedbackform.types.website.environment.userAgent=삭제 진행 중...
+feedbackform.types.website.environment.screenResolution=삭제 진행 중...
+feedbackform.labelAttachFilesOrImages=삭제 진행 중...
+feedbackform.labelAttachFileOrImage=삭제 진행 중...
+feedbackform.labelAttachFile=삭제 진행 중...
+feedbackform.labelAttachFiles=삭제 진행 중...
+feedbackform.tooManyFiles=삭제 진행 중...
+feedbackform.maxFileSizeExceededSeveral=이 저장되었지만, 일부 새롭게 실패한 검사가 있습니다: 일치하지 않는 마침표(.), 일치하지 않는 물음표(?)
+feedbackform.maxFileSizeExceededOne=이 저장되었지만, 일부 새롭게 실패한 검사가 있습니다: 일치하지 않는 마침표(.), 일치하지 않는 물음표(?)
+feedbackform.fileSizeUnit.B=이 저장되었지만, 일부 새롭게 실패한 검사가 있습니다: 일치하지 않는 마침표(.), 일치하지 않는 물음표(?)
+feedbackform.fileSizeUnit.KB=이 저장되었지만, 일부 새롭게 실패한 검사가 있습니다: 일치하지 않는 마침표(.), 일치하지 않는 물음표(?)
+feedbackform.fileSizeUnit.MB=이 저장되었지만, 일부 새롭게 실패한 검사가 있습니다: 일치하지 않는 마침표(.)
+feedbackform.fileSizeUnit.GB=이 저장되었지만, 일부 새롭게 실패한 검사가 있습니다: 일치하지 않는 마침표(.)
+feedbackform.labelMax=이 저장되었지만, 일부 새롭게 실패한 검사가 있습니다: 일치하지 않는 콜론(:)
+feedbackform.labelFiles=이 저장되었지만, 일부 새롭게 실패한 검사가 있습니다: 일치하지 않는 물음표(?)
+feedbackform.wysiwygFieldRequired=이 저장되었지만, 일부 새롭게 실패한 검사가 있습니다: 일치하지 않는 마침표(.)
+feedbackform.incorrectFileType=이 저장되었지만, 일부 새롭게 실패한 검사가 있습니다: 일치하지 않는 마침표(.)
+</content>
+  </xwikidoc>
