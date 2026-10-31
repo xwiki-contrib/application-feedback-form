@@ -1,0 +1,94 @@
+<?xml version="1.1" encoding="UTF-8"?>
+
+<!--
+ * See the NOTICE file distributed with this work for additional
+ * information regarding copyright ownership.
+ *
+ * This is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as
+ * published by the Free Software Foundation; either version 2.1 of
+ * the License, or (at your option) any later version.
+ *
+ * This software is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with this software; if not, write to the Free
+ * Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
+ * 02110-1301 USA, or see the FSF site: http://www.fsf.org.
+-->
+
+<xwikidoc version="1.5" reference="FeedbackFormCode.Translations" locale="da">
+  <web>FeedbackFormCode</web>
+  <name>Translations</name>
+  <language>da</language>
+  <defaultLanguage>en</defaultLanguage>
+  <translation>1</translation>
+  <creator>xwiki:XWiki.Admin</creator>
+  <parent>WebHome</parent>
+  <author>xwiki:XWiki.Admin</author>
+  <originalMetadataAuthor>xwiki:XWiki.Admin</originalMetadataAuthor>
+  <contentAuthor>xwiki:XWiki.Admin</contentAuthor>
+  <version>1.1</version>
+  <title/>
+  <comment/>
+  <minorEdit>false</minorEdit>
+  <syntaxId>plain/1.0</syntaxId>
+  <hidden>true</hidden>
+  <content>## Feedback form
+### Missing: feedbackform.buttonLabel=
+### Missing: feedbackform.title=
+### Missing: feedbackform.introText=
+### Missing: feedbackform.type=
+### Missing: feedbackform.type.currentPage=
+### Missing: feedbackform.type.other=
+### Missing: feedbackform.types.website=
+### Missing: feedbackform.types.website.field.title=
+### Missing: feedbackform.types.website.field.title.ms=
+### Missing: feedbackform.types.website.field.title.mr=
+### Missing: feedbackform.types.website.field.title.other=
+### Missing: feedbackform.types.website.field.firstName=
+### Missing: feedbackform.types.website.field.lastName=
+### Missing: feedbackform.user.reporter=
+### Missing: feedbackform.types.website.field.email=
+### Missing: feedbackform.types.website.field.subject=
+### Missing: feedbackform.types.website.field.message=
+### Missing: feedbackform.types.website.confirmationMessage=
+### Missing: feedbackform.types.website.email.page=
+### Missing: feedbackform.types.website.email.user=
+### Missing: feedbackform.types.website.email.subject.user=
+### Missing: feedbackform.types.website.email.wiki=
+### Missing: feedbackform.types.website.email.subject.wiki=
+### Missing: feedbackform.confirmationMessage=
+### Missing: feedbackform.attachment=
+### Missing: feedbackform.consentMessage=
+### Missing: feedbackform.sendFeedback=
+### Missing: feedbackform.invalidFile=
+### Missing: feedbackform.invalidFormData=
+### Missing: feedbackform.sendingFeedbackError=
+### Missing: feedbackform.sendingEmailFeedbackError=
+### Missing: feedbackform.submitError=
+### Missing: feedbackform.types.website.environment=
+### Missing: feedbackform.types.website.environment.pageURL=
+### Missing: feedbackform.types.website.environment.referrer=
+### Missing: feedbackform.types.website.environment.userAgent=
+### Missing: feedbackform.types.website.environment.screenResolution=
+### Missing: feedbackform.labelAttachFilesOrImages=
+### Missing: feedbackform.labelAttachFileOrImage=
+### Missing: feedbackform.labelAttachFile=
+### Missing: feedbackform.labelAttachFiles=
+### Missing: feedbackform.tooManyFiles=
+### Missing: feedbackform.maxFileSizeExceededSeveral=
+### Missing: feedbackform.maxFileSizeExceededOne=
+### Missing: feedbackform.fileSizeUnit.B=
+### Missing: feedbackform.fileSizeUnit.KB=
+### Missing: feedbackform.fileSizeUnit.MB=
+### Missing: feedbackform.fileSizeUnit.GB=
+### Missing: feedbackform.labelMax=
+### Missing: feedbackform.labelFiles=
+### Missing: feedbackform.wysiwygFieldRequired=
+### Missing: feedbackform.incorrectFileType=
+</content>
+</xwikidoc>
